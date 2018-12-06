@@ -32,7 +32,7 @@ def get_keyboards():
         "one_time": True,
         "buttons":[
             [get_button(label="Подписаться/отписаться",color="default",payload="subscribe")],
-            [get_button(label="Подбор направления",color="default",payload="directions")],
+            [get_button(label="Подбор направления",color="default",payload="direction_selection")],
             [get_button(label="Конкурсные списки",color="primary",payload="lists")]
         ]
     }
