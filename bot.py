@@ -46,22 +46,22 @@ def search_direction(id):
                 if temp != 0:
                     for item in temp:
                         res.append(item)
-    res = list(set(res))
-    response = ""
-    vk.method("messages.send", {"user_id": id,"message":"По данным сферам найдены следуюшие направления:"})
-    for item in res:
-        if item[1]=='null':
-            if item[3]=='null':
-                response = response + "Направление: " + '"' + item[0] + '"' + " на факультете " + item[2]+ "\n" +"Ссылка на направление: " + item[4]+"\n\n"
+        res = list(set(res))
+        response = ""
+        vk.method("messages.send", {"user_id": id,"message":"По данным сферам найдены следуюшие направления:"})
+        for item in res:
+            if item[1]=='null':
+                if item[3]=='null':
+                    response = response + "Направление: " + '"' + item[0] + '"' + " на факультете " + item[2]+ "\n" +"Ссылка на направление: " + item[4]+"\n\n"
+                else:
+                    response = response + "Направление: " + '"' + item[0] + '"' + " на факультете " + item[2]+ "\n" +item[3] + "\n" +"Ссылка на направление: " + item[4]+"\n\n"
             else:
-                response = response + "Направление: " + '"' + item[0] + '"' + " на факультете " + item[2]+ "\n" +item[3] + "\n" +"Ссылка на направление: " + item[4]+"\n\n"
-        else:
-            if item[3]=='null':
-                response = response + "Направление: " + '"' + item[0] + ' (' + item[1] + ')' + '"' + " на факультете " + item[2]+ "\n" +"Ссылка на направление: " + item[4]+"\n\n"
-            else:
-                response = response + "Направление: " + '"' + item[0] + ' (' + item[1] + ')' + '"' + " на факультете " + item[2]+ "\n" +item[3] + "\n" +"Ссылка на направление: " + item[4]+"\n\n"
-    vk.method("messages.send", {"user_id": id,"message": response})
-    vk.method("messages.send", {"user_id": id,"message": "Искал как в последний раз:)","keyboard": keyboard_default})
+                if item[3]=='null':
+                    response = response + "Направление: " + '"' + item[0] + ' (' + item[1] + ')' + '"' + " на факультете " + item[2]+ "\n" +"Ссылка на направление: " + item[4]+"\n\n"
+                else:
+                    response = response + "Направление: " + '"' + item[0] + ' (' + item[1] + ')' + '"' + " на факультете " + item[2]+ "\n" +item[3] + "\n" +"Ссылка на направление: " + item[4]+"\n\n"
+        vk.method("messages.send", {"user_id": id,"message": response})
+        vk.method("messages.send", {"user_id": id,"message": "Искал как в последний раз:)","keyboard": keyboard_default})
 
 
 #WAIT_FILLING_POINTS = "-3"
