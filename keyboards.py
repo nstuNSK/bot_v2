@@ -22,7 +22,7 @@ def get_keyboards():
     keyboard_start = {
         "one_time": True,
         "buttons":[
-            [get_button(label="Начать",color="default", payload="admin")]
+            [get_button(label="Начать",color="primary", payload="admin")]
         ]
     }
     keyboard_start = convertToString(keyboard_start)
@@ -33,7 +33,7 @@ def get_keyboards():
         "buttons":[
             [get_button(label="Подписаться/отписаться",color="default",payload="subscribe")],
             [get_button(label="Подбор направления",color="default",payload="direction_selection")],
-            [get_button(label="Конкурсные списки",color="primary",payload="lists")]
+            [get_button(label="Конкурсные списки",color="default",payload="lists")]
         ]
     }
     keyboard_main_menu = convertToString(keyboard_main_menu)
