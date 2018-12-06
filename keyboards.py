@@ -42,7 +42,7 @@ def get_keyboards():
     keyboard_subscribe={
         "one_time": True,
         "buttons":[
-            [get_button(label="Для школьника",color="default", payload="schollchild")],
+            [get_button(label="Для школьника",color="default", payload="schoolchild")],
             [get_button(label="Для поступающего",color="default",payload="enrollee")]
         ]
     }
