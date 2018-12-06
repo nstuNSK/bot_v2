@@ -13,6 +13,7 @@ import keyboards
 
 def auth():
     token = getter.get_token()
+    print(token)
     vk = vk_api.VkApi(token=token)
     vk._auth_token()
     return vk
@@ -152,6 +153,7 @@ def get_msg():
             time.sleep(0.1)
                  
 key = keyboards.get_keyboards() 
+
 vk = auth()
 print(vk)  
 connection = data.connect()
