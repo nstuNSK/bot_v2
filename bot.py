@@ -21,16 +21,16 @@ def auth():
 def subscribe(type, id):
     if data.get_field(connection=connection, table_name="USERS",select_field = type, field="ID_VK", value=id)[0][0]==False:
         data.set_field(connection = connection, table_name = "USERS", ID_VK = id, field = type, value = "1")
-        vk.method("messages.send", {"user_id": id, "message": "Теперь ты подписан на уведомления", 'keyboard': key['main_menu']})
+        vk.method("messages.send", {"user_id": id, "message": "Теперь я буду отправлять тебе новости! Люблю это😍", 'keyboard': key['main_menu']})
     else:
         data.set_field(connection = connection, table_name = "USERS", ID_VK = id, field = type, value = "0")
-        vk.method("messages.send", {"user_id": id, "message": "Теперь ты отписан от уведомлений", 'keyboard': key['main_menu']})
+        vk.method("messages.send", {"user_id": id, "message": "Не хочешь, как хочешь...\nНо, если передумаешь, я всегда готов💪🏻", 'keyboard': key['main_menu']})
 
 def search_direction(id):
     res = []
     sphere1 = data.get_field(select_field = "SPHERE1",table_name = "USERS",connection= connection,value=id, field="id_vk")[0][0]
     if sphere1 == 0:
-        vk.method("messages.send", {"user_id": id, "message": "Нет добавленных сфер:", "keyboard":key['sphere']})
+        vk.method("messages.send", {"user_id": id, "message": "Но... ведь... сферы не выбраны... Давай, исправляйся😊", "keyboard":key['sphere']})
     else:
         res = data.get_field(select_field = "DIRECTION, PROFILE_NAME, FACULT, DESCR, URL",table_name = "DIRECTIONS",connection= connection,value=sphere1, field="SPHERE")
         sphere2 = data.get_field(select_field = "SPHERE2",table_name = "USERS",connection= connection,value=id, field="id_vk")[0][0]
@@ -47,7 +47,7 @@ def search_direction(id):
                         res.append(item)
         res = list(set(res))
         response = ""
-        vk.method("messages.send", {"user_id": id,"message":"По данным сферам найдены следуюшие направления:"})
+        vk.method("messages.send", {"user_id": id,"message":"Вот что я нашел🙃"})
         for item in res:
             if item[1]=='null':
                 if item[3]=='null':
@@ -64,7 +64,7 @@ def search_direction(id):
                 response = ""
         if(response!=""):
             vk.method("messages.send", {"user_id": id,"message": response})
-        vk.method("messages.send", {"user_id": id,"message": "Искал как в последний раз:)", 'keyboard': key['main_menu']})
+        vk.method("messages.send", {"user_id": id,"message": "Искал как в последний раз😂", 'keyboard': key['main_menu']})
 
 
 #WAIT_FILLING_POINTS = "-3"
@@ -81,10 +81,10 @@ def data_processing(id, pay, msg):
         vk.method("messages.send", {"user_id": id, "message": "Итак, чем я могу тебе помочь?", "keyboard": key['main_menu']})
     
     elif msg=="admin":
-        vk.method("messages.send", {"user_id": id, "message": "Начинаю с начала:", "keyboard":key['start']})
+        vk.method("messages.send", {"user_id": id, "message": "Опять по новой? Ну, ладно...", "keyboard":key['start']})
     
     elif pay=="subscribe":
-        vk.method("messages.send", {"user_id": id, "message": "Какие новости вы хотите получать?", "keyboard":key['subscribe']})
+        vk.method("messages.send", {"user_id": id, "message": "Какие новости нас интересуют?", "keyboard":key['subscribe']})
     
     elif pay=="enrollee":
         subscribe(type = 'SUB_E', id = id)
@@ -93,29 +93,29 @@ def data_processing(id, pay, msg):
         subscribe(type = 'SUB_S', id = id)
     
     elif pay=="direction_selection":
-        vk.method("messages.send", {"user_id": id, "message": "Как подобрать напрваление?", "keyboard":key['direction_selection']})
+        vk.method("messages.send", {"user_id": id, "message": " А как подобрать напрваление?", "keyboard":key['direction_selection']})
     
     elif pay=="sphere":
         data.set_field(connection = connection, table_name = "USERS", ID_VK = id, field = "SPHERE1", value = 0)
         data.set_field(connection = connection, table_name = "USERS", ID_VK = id, field = "SPHERE2", value = 0)
         data.set_field(connection = connection, table_name = "USERS", ID_VK = id, field = "SPHERE3", value = 0)
-        vk.method("messages.send", {"user_id": id, "message": "Выберите сферу:", "keyboard":key['sphere']})
+        vk.method("messages.send", {"user_id": id, "message": "Подскажи сферу, а то тут много😊", "keyboard":key['sphere']})
     
     elif pay=="Машиностроение" or pay=="Безопасность" or pay=="Энергетика" or pay=="IT-технологии" or pay=="Электроника" or pay=="Авиация" or pay=="Общество" or pay=="Экономика" or pay=="Химия" or pay=="Языки" or pay=="Физика":
         sphere_id = data.get_field(table_name = "SPHERE", connection = connection, select_field = 'SPHERE', field = 'NAME_SPHERE', value = pay)[0][0]
         sphere1 = data.get_field(table_name = "USERS", connection = connection, select_field = 'SPHERE1', field = 'ID_VK', value = id)[0][0]
         if sphere1==0:
-            vk.method("messages.send", {"user_id": id, "message": "Сфера добавлена!", "keyboard":key['sphere']})
+            vk.method("messages.send", {"user_id": id, "message": "Добавил! Это было легко😉", "keyboard":key['sphere']})
             data.set_field(connection = connection, table_name = 'USERS', ID_VK = id, field = 'SPHERE1', value = sphere_id)
         else:
             sphere2 = data.get_field(table_name = "USERS", connection = connection, select_field = 'SPHERE2', field = 'ID_VK', value = id)[0][0]
             if sphere2 == 0:
-                vk.method("messages.send", {"user_id": id, "message": "Сфера добавлена!", "keyboard":key['sphere']})
+                vk.method("messages.send", {"user_id": id, "message": "Проще простого! Добавил!", "keyboard":key['sphere']})
                 data.set_field(connection = connection, table_name = 'USERS', ID_VK = id, field = 'SPHERE2', value = sphere_id)
             else:
                 sphere3 = data.get_field(table_name = "USERS", connection = connection, select_field = 'SPHERE3', field = 'ID_VK', value = id)[0][0]
                 if sphere3 == 0:
-                    vk.method("messages.send", {"user_id": id, "message": "Сфера добавлена!", "keyboard":key['sphere']})
+                    vk.method("messages.send", {"user_id": id, "message": "Изи добавил!", "keyboard":key['sphere']})
                     data.set_field(connection = connection, table_name = 'USERS', ID_VK = id, field = 'SPHERE3', value = sphere_id)
                     search_direction(id)
         
@@ -130,7 +130,7 @@ def data_processing(id, pay, msg):
         pass
     
     elif pay == "frequency":
-        vk.method("messages.send", {"user_id": id, "message": "Как часто вы хотите получать уведомления?", "keyboard": key['frequency']})
+        vk.method("messages.send", {"user_id": id, "message": "Как часто мне отправлять тебе новости?", "keyboard": key['frequency']})
     elif msg == "Бу!":
         vk.method("messages.send", {"user_id": id, "message": "Аааа!"})
         vk.method("messages.send", {"user_id": id, "message": "А, это ты😃"})
