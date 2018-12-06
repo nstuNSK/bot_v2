@@ -129,9 +129,11 @@ def get_msg():
     while True:
         try:
             messages = vk.method("messages.getConversations", {"offset": 0, "count": 100, "filter": "unanswered"})
+            print(1)
             if messages["count"] >= 1:
                 id = messages["items"][0]["last_message"]["from_id"]
                 msg = messages["items"][0]["last_message"]["text"]
+                print(2)
                 if "payload" in messages["items"][0]["last_message"]:
                     pay = messages["items"][0]["last_message"]["payload"][1:-1]
                     try:
