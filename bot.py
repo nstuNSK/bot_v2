@@ -122,15 +122,19 @@ def data_processing(id, pay, msg):
    
     elif pay == "search":
         search_direction(id = id)
+    elif pay == "name_dir":
+        vk.method("messages.send", {"user_id": id, "message": "Меня пока что этому не научили😞\nНо совсем скоро научат, обещаю!", "keyboard": key['main_menu']})
     
     elif pay == "lists":
         vk.method("messages.send", {"user_id": id, "message": "Выберите функцию:", "keyboard": key['list']})
     
     elif pay == "lk_code":
-        pass
+        vk.method("messages.send", {"user_id": id, "message": "Меня пока что этому не научили😞\nНо совсем скоро научат, обещаю!", "keyboard": key['main_menu']})
     
     elif pay == "frequency":
-        vk.method("messages.send", {"user_id": id, "message": "Как часто мне отправлять тебе новости?", "keyboard": key['frequency']})
+        vk.method("messages.send", {"user_id": id, "message": "Меня пока что этому не научили😞\nНо совсем скоро научат, обещаю!", "keyboard": key['main_menu']})
+        #vk.method("messages.send", {"user_id": id, "message": "Как часто мне отправлять тебе новости?", "keyboard": key['frequency']})
+    
     elif msg == "Бу!":
         vk.method("messages.send", {"user_id": id, "message": "Аааа!"})
         vk.method("messages.send", {"user_id": id, "message": "А, это ты😃"})
