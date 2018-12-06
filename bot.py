@@ -148,3 +148,5 @@ def get_msg():
             time.sleep(0.1)
         finally:
             data_processing(id=id, pay=pay, msg=msg)
+
+get_msg()
