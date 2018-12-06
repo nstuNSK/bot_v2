@@ -14,7 +14,7 @@ import keyboards
 def auth():
     token = getter.get_token()
     print(token)
-    vk = vk_api.VkApi(token=token+"1")
+    vk = vk_api.VkApi(token=token)
     vk._auth_token()
     return vk
 
@@ -129,7 +129,7 @@ def data_processing(id, pay, msg):
 def get_msg():
     print(0)
     while True:
-        try:
+        #try:
             messages = vk.method("messages.getConversations", {"offset": 0, "count": 100, "filter": "unanswered"})
             print(1)
             if messages["count"] >= 1:
@@ -148,9 +148,9 @@ def get_msg():
                     pay = "0"
                     print(msg)
                 data_processing(id=id, pay=pay, msg=msg)
-        except Exception:
-            print(2)
-            time.sleep(0.1)
+        #except Exception:
+            #print(2)
+            #time.sleep(0.1)
                  
 key = keyboards.get_keyboards() 
 
