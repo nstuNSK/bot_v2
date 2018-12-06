@@ -143,7 +143,7 @@ def get_keyboards():
     return{
         'start': keyboard_start,
         'main_menu': keyboard_main_menu,
-        'subcribe': keyboard_subscribe,
+        'subscribe': keyboard_subscribe,
         'direction_selection': keyboard_direction_selection,
         'list': keyboard_list,
         'sphere': keyboard_sphere,
