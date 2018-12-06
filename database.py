@@ -14,10 +14,10 @@ def connect():
         return cnx
 
 def set_user(table_name,connection,ID_VK):
-    if search_field(table_name, connection, ID_VK , "id_vk")==False:
+    if search_field(table_name, connection, ID_VK , "ID_VK")==False:
         try:
             with connection.cursor() as cursor:
-                sql = "INSERT INTO " + table_name + " (id_vk) VALUES (%s)"
+                sql = "INSERT INTO " + table_name + " (ID_VK) VALUES (%s)"
                 print(sql)
                 str = cursor.execute(sql,(ID_VK))
                 connection.commit()
@@ -49,7 +49,7 @@ def get_field(connection,table_name,select_field,field,value):
 
 def set_field(connection, table_name, ID_VK, field, value):
     with connection.cursor() as cursor:
-        sql = "UPDATE " + table_name + " SET " + field + " = " + str(value) + " WHERE id_vk = %s"
+        sql = "UPDATE " + table_name + " SET " + field + " = " + str(value) + " WHERE ID_VK = %s"
         r = cursor.execute(sql, (ID_VK))
         connection.commit()
 def get_fields(connection,table_name,select_field,field,value):
