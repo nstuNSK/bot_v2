@@ -60,7 +60,7 @@ def search_direction(id):
                     response = response + "Направление: " + '"' + item[0] + ' (' + item[1] + ')' + '"' + " на факультете " + item[2]+ "\n" +"Ссылка на направление: " + item[4]+"\n\n"
                 else:
                     response = response + "Направление: " + '"' + item[0] + ' (' + item[1] + ')' + '"' + " на факультете " + item[2]+ "\n" +item[3] + "\n" +"Ссылка на направление: " + item[4]+"\n\n"
-        print(response.length)
+        print(len(response))
         vk.method("messages.send", {"user_id": id,"message": response})
         vk.method("messages.send", {"user_id": id,"message": "Искал как в последний раз:)", 'keyboard': key['main_menu']})
 
