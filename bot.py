@@ -126,6 +126,7 @@ def data_processing(id, pay, msg):
         vk.method("messages.send", {"user_id": id, "message": "Как часто вы хотите получать уведомления?", "keyboard": key['frequency']})
 
 def get_msg():
+    print(0)
     while True:
         try:
             messages = vk.method("messages.getConversations", {"offset": 0, "count": 100, "filter": "unanswered"})
