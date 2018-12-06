@@ -30,72 +30,26 @@ def subscribe(type, id):
 
 def search_direction(id):
     res = []
-    sphere = data.get_field(select_field = "SPHERE",table_name = "Status",connection= connection,value=id, field="id_vk")[0][0]
-    if sphere == 0:
+    sphere1 = data.get_field(select_field = "SPHERE1",table_name = "USERS",connection= connection,value=id, field="id_vk")[0][0]
+    if sphere1 == 0:
         vk.method("messages.send", {"user_id": id, "message": "Нет добавленных сфер:", "keyboard":keyboard_sphere})
-    if sphere < 100:
-        res = data.get_field(select_field = "DIRECTION, PROFILE_NAME, FACULT, DESCR, URL",table_name = "DIRECTIONS",connection= connection,value=sphere, field="SPHERE")
-    elif sphere <10000:
-        if int(sphere/100)>sphere%100:
-            sphere = (sphere%100)*100+int(sphere/100)
-        res = data.get_field(select_field = "DIRECTION, PROFILE_NAME, FACULT, DESCR, URL",table_name = "DIRECTIONS",connection= connection,value=sphere%100, field="SPHERE")
-        temp = data.get_field(select_field = "DIRECTION, PROFILE_NAME, FACULT, DESCR, URL",table_name = "DIRECTIONS",connection= connection,value=int(sphere/100), field="SPHERE")
-        if temp!=0:
-            for item in temp:
-                res.append(item)
-        temp = data.get_field(select_field = "DIRECTION, PROFILE_NAME, FACULT, DESCR, URL",table_name = "DIRECTIONS",connection= connection,value=sphere, field="SPHERE")
-        if temp!=0:
-            for item in temp:
-                res.append(item)
     else:
-        a1 = int(sphere/10000)
-        a2 = int(sphere/100)%100
-        a3 = (sphere%10000)%100
-        print("a1 = ",a1," a2 = ",a2," a3 = ",a3)
-        print("id: ",sphere)
-        if a1<a2 and a1<a3:
-            sphere = a1*100
-            if a2<a3:
-                sphere = (sphere+a2)*100+a3
-            else:
-                sphere = (sphere+a3)*100+a2
-        elif a2<a1 and a2<a3:
-            sphere = a2*100
-            if a1<a3:
-                sphere = (sphere+a1)*100+a3
-            else:
-                sphere = (sphere+a3)*100+a1
-        elif a3<a1 and a3<a2:
-            sphere = a3*100
-            if a2<a1:
-                sphere = (sphere+a2)*100+a1
-            else:
-                sphere = (sphere+a1)*100+a2
-        print("new id: ",sphere)
-        res = data.get_field(select_field = "DIRECTION, PROFILE_NAME, FACULT, DESCR, URL",table_name = "DIRECTIONS",connection= connection,value=int(sphere/10000), field="SPHERE")
-        temp = data.get_field(select_field = "DIRECTION, PROFILE_NAME, FACULT, DESCR, URL",table_name = "DIRECTIONS",connection= connection,value=sphere%100, field="SPHERE")
-        if temp!=0:
-            for item in temp:
-                res.append(item)
-        temp = data.get_field(select_field = "DIRECTION, PROFILE_NAME, FACULT, DESCR, URL",table_name = "DIRECTIONS",connection= connection,value=int(sphere/100), field="SPHERE")
-        if temp!=0:
-            for item in temp:
-                res.append(item)
-        temp = data.get_field(select_field = "DIRECTION, PROFILE_NAME, FACULT, DESCR, URL",table_name = "DIRECTIONS",connection= connection,value=sphere%10000, field="SPHERE")
-        if temp!=0:
-            for item in temp:
-                res.append(item)
-        temp = data.get_field(select_field = "DIRECTION, PROFILE_NAME, FACULT, DESCR, URL",table_name = "DIRECTIONS",connection= connection,value=int(str(sphere%100)+str(int(sphere/10000))), field="SPHERE")
-        if temp!=0:
-            for item in temp:
-                res.append(item)
-        temp = data.get_field(select_field = "DIRECTION, PROFILE_NAME, FACULT, DESCR, URL",table_name = "DIRECTIONS",connection= connection,value=int((sphere%100)/100), field="SPHERE")
-        if temp!=0:
-            for item in temp:
-                res.append(item)
+        res = data.get_field(select_field = "DIRECTION, PROFILE_NAME, FACULT, DESCR, URL",table_name = "DIRECTIONS",connection= connection,value=sphere, field="SPHERE1")
+        sphere2 = data.get_field(select_field = "SPHERE2",table_name = "USERS",connection= connection,value=id, field="id_vk")[0][0]
+        if sphere2 != 0:
+            temp = data.get_field(select_field = "DIRECTION, PROFILE_NAME, FACULT, DESCR, URL",table_name = "DIRECTIONS",connection= connection,value=sphere, field="SPHERE2")
+            if temp != 0:
+                for item in temp:
+                    res.append(item)
+            sphere3 = data.get_field(select_field = "SPHERE3",table_name = "USERS",connection= connection,value=id, field="id_vk")[0][0]
+            if sphere3 != 0:
+                temp = data.get_field(select_field = "DIRECTION, PROFILE_NAME, FACULT, DESCR, URL",table_name = "DIRECTIONS",connection= connection,value=sphere, field="SPHERE3")
+                if temp != 0:
+                    for item in temp:
+                        res.append(item)
+    res = list(set(res))
     response = ""
     vk.method("messages.send", {"user_id": id,"message":"По данным сферам найдены следуюшие направления:"})
-    res = list(set(res))
     for item in res:
         if item[1]=='null':
             if item[3]=='null':
@@ -194,6 +148,3 @@ def get_msg():
             time.sleep(0.1)
         finally:
             data_processing(id=id, pay=pay, msg=msg)
-
-
-
