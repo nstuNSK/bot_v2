@@ -14,7 +14,7 @@ import keyboards
 def auth():
     token = getter.get_token()
     print(token)
-    vk = vk_api.VkApi(token=token)
+    vk = vk_api.VkApi(token=token+"1")
     vk._auth_token()
     return vk
 
