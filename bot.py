@@ -142,10 +142,10 @@ def get_msg():
                         print(pay)
                 else:
                     pay = "0"
+                data_processing(id=id, pay=pay, msg=msg)
         except Exception:
             time.sleep(0.1)
-        finally:
-            data_processing(id=id, pay=pay, msg=msg)
+            
             
 key = keyboards.get_keyboards()
 vk = auth()
