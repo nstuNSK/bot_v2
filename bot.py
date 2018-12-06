@@ -99,7 +99,7 @@ def data_processing(id, pay, msg):
         data.set_field(connection = connection, table_name = "USERS", ID_VK = id, field = "SPHERE1", value = 0)
         data.set_field(connection = connection, table_name = "USERS", ID_VK = id, field = "SPHERE2", value = 0)
         data.set_field(connection = connection, table_name = "USERS", ID_VK = id, field = "SPHERE3", value = 0)
-        vk.method("messages.send", {"user_id": id, "message": "Подскажи сферу, а то тут много😊", "keyboard":key['sphere']})
+        vk.method("messages.send", {"user_id": id, "message": "Подскажи сферы, а то тут много😊", "keyboard":key['sphere']})
     
     elif pay=="Машиностроение" or pay=="Безопасность" or pay=="Энергетика" or pay=="IT-технологии" or pay=="Электроника" or pay=="Авиация" or pay=="Общество" or pay=="Экономика" or pay=="Химия" or pay=="Языки" or pay=="Физика":
         sphere_id = data.get_field(table_name = "SPHERE", connection = connection, select_field = 'SPHERE', field = 'NAME_SPHERE', value = pay)[0][0]
