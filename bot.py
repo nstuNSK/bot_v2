@@ -60,6 +60,7 @@ def search_direction(id):
                     response = response + "Направление: " + '"' + item[0] + ' (' + item[1] + ')' + '"' + " на факультете " + item[2]+ "\n" +"Ссылка на направление: " + item[4]+"\n\n"
                 else:
                     response = response + "Направление: " + '"' + item[0] + ' (' + item[1] + ')' + '"' + " на факультете " + item[2]+ "\n" +item[3] + "\n" +"Ссылка на направление: " + item[4]+"\n\n"
+        print(response)
         vk.method("messages.send", {"user_id": id,"message": response})
         vk.method("messages.send", {"user_id": id,"message": "Искал как в последний раз:)", 'keyboard': key['main_menu']})
 
@@ -114,7 +115,6 @@ def data_processing(id, pay, msg):
                 if sphere3 == 0:
                     vk.method("messages.send", {"user_id": id, "message": "Сфера добавлена!", "keyboard":key['sphere']})
                     data.set_field(connection = connection, table_name = 'USERS', ID_VK = id, field = 'SPHERE3', value = sphere_id)
-                else:
                     search_direction(id)
         
    
