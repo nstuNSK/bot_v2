@@ -33,16 +33,16 @@ def search_direction(id):
     if sphere1 == 0:
         vk.method("messages.send", {"user_id": id, "message": "Нет добавленных сфер:", "keyboard":key['sphere']})
     else:
-        res = data.get_field(select_field = "DIRECTION, PROFILE_NAME, FACULT, DESCR, URL",table_name = "DIRECTIONS",connection= connection,value=sphere1, field="SPHERE1")
+        res = data.get_field(select_field = "DIRECTION, PROFILE_NAME, FACULT, DESCR, URL",table_name = "DIRECTIONS",connection= connection,value=sphere1, field="SPHERE")
         sphere2 = data.get_field(select_field = "SPHERE2",table_name = "USERS",connection= connection,value=id, field="id_vk")[0][0]
         if sphere2 != 0:
-            temp = data.get_field(select_field = "DIRECTION, PROFILE_NAME, FACULT, DESCR, URL",table_name = "DIRECTIONS",connection= connection,value=sphere2, field="SPHERE2")
+            temp = data.get_field(select_field = "DIRECTION, PROFILE_NAME, FACULT, DESCR, URL",table_name = "DIRECTIONS",connection= connection,value=sphere2, field="SPHERE")
             if temp != 0:
                 for item in temp:
                     res.append(item)
             sphere3 = data.get_field(select_field = "SPHERE3",table_name = "USERS",connection= connection,value=id, field="id_vk")[0][0]
             if sphere3 != 0:
-                temp = data.get_field(select_field = "DIRECTION, PROFILE_NAME, FACULT, DESCR, URL",table_name = "DIRECTIONS",connection= connection,value=sphere3, field="SPHERE3")
+                temp = data.get_field(select_field = "DIRECTION, PROFILE_NAME, FACULT, DESCR, URL",table_name = "DIRECTIONS",connection= connection,value=sphere3, field="SPHERE")
                 if temp != 0:
                     for item in temp:
                         res.append(item)
