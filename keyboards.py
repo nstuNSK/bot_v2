@@ -136,7 +136,7 @@ def get_keyboards():
         "buttons":[
             [get_button(label="Один раз в день",color="default",payload="one_per_day")],
             [get_button(label="Два раза в день",color="default",payload="two_per_day")],
-            [get_button(label="Один раз в два дня",color="primary",payload="one_per_two_day")]
+            [get_button(label="Один раз в два дня",color="default",payload="one_per_two_day")]
         ]
     }
     keyboard_frequency = convertToString(keyboard_frequency)
