@@ -150,8 +150,11 @@ def get_msg():
         except Exception:
             time.sleep(0.1)
             
-            
+print(4)       
 key = keyboards.get_keyboards()
+print(5)  
 vk = auth()
+print(6)  
 connection = data.connect()
+print(7)  
 get_msg()
