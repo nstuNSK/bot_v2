@@ -21,11 +21,10 @@ def auth():
 def subscribe(type, id):
     if data.get_field(connection=connection, table_name="USERS",select_field = type, field="ID_VK", value=id)[0][0]==False:
         data.set_field(connection = connection, table_name = "USERS", ID_VK = id, field = type, value = "1")
-        vk.method("messages.send", {"user_id": id, "message": "Теперь ты подписан на уведомления"})
+        vk.method("messages.send", {"user_id": id, "message": "Теперь ты подписан на уведомления", 'keyboard': key['main_menu']})
     else:
         data.set_field(connection = connection, table_name = "USERS", ID_VK = id, field = type, value = "0")
-        vk.method("messages.send", {"user_id": id, "message": "Теперь ты отписан от уведомлений"})
-    #use_menu(status=data.get_field(connection=connection, table_name="USERS",select_field="status", field="ID_VK", value=id)[0][0])
+        vk.method("messages.send", {"user_id": id, "message": "Теперь ты отписан от уведомлений", 'keyboard': key['main_menu']})
 
 def search_direction(id):
     res = []
