@@ -102,20 +102,21 @@ def data_processing(id, pay, msg):
         sphere1 = data.get_field(table_name = "USERS", connection = connection, select_field = 'SPHERE1', field = 'ID_VK', value = id)[0][0]
         print(sphere1)
         if sphere1==0:
-            print('tut 1')
+            vk.method("messages.send", {"user_id": id, "message": "Сфера добавлена!", "keyboard":key['sphere']})
             data.set_field(connection = connection, table_name = 'USERS', ID_VK = id, field = 'SPHERE1', value = sphere_id)
         else:
             sphere2 = data.get_field(table_name = "USERS", connection = connection, select_field = 'SPHERE2', field = 'ID_VK', value = id)[0][0]
             if sphere2 == 0:
-                print('tut 2')
+                vk.method("messages.send", {"user_id": id, "message": "Сфера добавлена!", "keyboard":key['sphere']})
                 data.set_field(connection = connection, table_name = 'USERS', ID_VK = id, field = 'SPHERE2', value = sphere_id)
             else:
                 sphere3 = data.get_field(table_name = "USERS", connection = connection, select_field = 'SPHERE3', field = 'ID_VK', value = id)[0][0]
                 if sphere3 == 0:
-                    print('tut 3')
+                    vk.method("messages.send", {"user_id": id, "message": "Сфера добавлена!", "keyboard":key['sphere']})
                     data.set_field(connection = connection, table_name = 'USERS', ID_VK = id, field = 'SPHERE3', value = sphere_id)
                 else:
                     search_direction(id)
+        
    
     elif pay == "search":
         search_direction(id = id)
