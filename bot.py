@@ -149,12 +149,9 @@ def get_msg():
                 data_processing(id=id, pay=pay, msg=msg)
         except Exception:
             time.sleep(0.1)
-            
-print(4)       
-key = keyboards.get_keyboards()
-print(5)  
+                 
+key = keyboards.get_keyboards() 
 vk = auth()
-print(6)  
+print(vk)  
 connection = data.connect()
-print(7)  
 get_msg()
