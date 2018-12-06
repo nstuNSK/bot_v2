@@ -31,18 +31,18 @@ def search_direction(id):
     res = []
     sphere1 = data.get_field(select_field = "SPHERE1",table_name = "USERS",connection= connection,value=id, field="id_vk")[0][0]
     if sphere1 == 0:
-        vk.method("messages.send", {"user_id": id, "message": "Нет добавленных сфер:", "keyboard":keyboard_sphere})
+        vk.method("messages.send", {"user_id": id, "message": "Нет добавленных сфер:", "keyboard":key['sphere']})
     else:
-        res = data.get_field(select_field = "DIRECTION, PROFILE_NAME, FACULT, DESCR, URL",table_name = "DIRECTIONS",connection= connection,value=sphere, field="SPHERE1")
+        res = data.get_field(select_field = "DIRECTION, PROFILE_NAME, FACULT, DESCR, URL",table_name = "DIRECTIONS",connection= connection,value=sphere1, field="SPHERE1")
         sphere2 = data.get_field(select_field = "SPHERE2",table_name = "USERS",connection= connection,value=id, field="id_vk")[0][0]
         if sphere2 != 0:
-            temp = data.get_field(select_field = "DIRECTION, PROFILE_NAME, FACULT, DESCR, URL",table_name = "DIRECTIONS",connection= connection,value=sphere, field="SPHERE2")
+            temp = data.get_field(select_field = "DIRECTION, PROFILE_NAME, FACULT, DESCR, URL",table_name = "DIRECTIONS",connection= connection,value=sphere2, field="SPHERE2")
             if temp != 0:
                 for item in temp:
                     res.append(item)
             sphere3 = data.get_field(select_field = "SPHERE3",table_name = "USERS",connection= connection,value=id, field="id_vk")[0][0]
             if sphere3 != 0:
-                temp = data.get_field(select_field = "DIRECTION, PROFILE_NAME, FACULT, DESCR, URL",table_name = "DIRECTIONS",connection= connection,value=sphere, field="SPHERE3")
+                temp = data.get_field(select_field = "DIRECTION, PROFILE_NAME, FACULT, DESCR, URL",table_name = "DIRECTIONS",connection= connection,value=sphere3, field="SPHERE3")
                 if temp != 0:
                     for item in temp:
                         res.append(item)
