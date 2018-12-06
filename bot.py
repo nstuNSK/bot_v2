@@ -10,9 +10,7 @@ import database as data
 import getter
 import keyboards
 
-key = keyboards.get_keyboards()
-vk = auth()
-connection = data.connect()
+
 def auth():
     token = getter.get_token()
     vk = vk_api.VkApi(token=token)
@@ -148,5 +146,8 @@ def get_msg():
             time.sleep(0.1)
         finally:
             data_processing(id=id, pay=pay, msg=msg)
-
+            
+key = keyboards.get_keyboards()
+vk = auth()
+connection = data.connect()
 get_msg()
