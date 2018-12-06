@@ -142,6 +142,7 @@ def get_msg():
                         print(pay)
                 else:
                     pay = "0"
+                    print(msg)
                 data_processing(id=id, pay=pay, msg=msg)
         except Exception:
             time.sleep(0.1)
