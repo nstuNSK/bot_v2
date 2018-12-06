@@ -101,15 +101,15 @@ def data_processing(id, pay, msg):
         sphere_id = data.get_field(table_name = "SPHERE", connection = connection, select_field = 'SPHERE', field = 'NAME_SPHERE', value = pay)
         sphere1 = data.get_field(table_name = "USERS", connection = connection, select_field = 'SPHERE1', field = 'ID_VK', value = id)
 
-        if sphere1==0:
+        if sphere1=='0':
             data.set_field(connection = connection, table_name = 'USERS', ID_VK = id, field = 'SPHERE1', value = sphere_id)
         else:
             sphere2 = data.get_field(table_name = "USERS", connection = connection, select_field = 'SPHERE2', field = 'ID_VK', value = id)
-            if sphere2 == 0:
+            if sphere2 == '0':
                 data.set_field(connection = connection, table_name = 'USERS', ID_VK = id, field = 'SPHERE2', value = sphere_id)
             else:
                 sphere3 = data.get_field(table_name = "USERS", connection = connection, select_field = 'SPHERE3', field = 'ID_VK', value = id)
-                if sphere3 == 0:
+                if sphere3 == '0':
                     data.set_field(connection = connection, table_name = 'USERS', ID_VK = id, field = 'SPHERE3', value = sphere_id)
                 else:
                     search_direction(id)
@@ -131,7 +131,6 @@ def get_msg():
     while True:
         #try:
             messages = vk.method("messages.getConversations", {"offset": 0, "count": 100, "filter": "unanswered"})
-            print(1)
             if messages["count"] >= 1:
                 id = messages["items"][0]["last_message"]["from_id"]
                 msg = messages["items"][0]["last_message"]["text"]
