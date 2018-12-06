@@ -132,7 +132,7 @@ def data_processing(id, pay, msg):
     elif pay == "frequency":
         vk.method("messages.send", {"user_id": id, "message": "Как часто вы хотите получать уведомления?", "keyboard": key['frequency']})
     else:
-        vk.method("messages.send", {"user_id": id, "message": "😭😭😭😭😭😭\nЯ тебя не понимаю😔\nИспользуй, пожалуйста, клавиатуру🙏🏻", "keyboard": key['main_menu']})
+        vk.method("messages.send", {"user_id": id, "message": "Я тебя не понимаю😔\nИспользуй, пожалуйста, клавиатуру🙏🏻", "keyboard": key['main_menu']})
 def get_msg():
     while True:
         #try:
