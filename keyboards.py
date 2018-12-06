@@ -148,5 +148,5 @@ def get_keyboards():
         'list': keyboard_list,
         'sphere': keyboard_sphere,
         'subjects': keyboard_subjects,
-        'frequency':keyboard_frequenc
+        'frequency':keyboard_frequency
     }
