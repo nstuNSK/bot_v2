@@ -124,7 +124,6 @@ def data_processing(id, pay, msg):
         search_direction(id = id)
     elif pay == "name_dir":
         vk.method("messages.send", {"user_id": id, "message": "Меня пока что этому не научили😞\nНо совсем скоро научат, обещаю!", "keyboard": key['main_menu']})
-    
     elif pay == "lists":
         vk.method("messages.send", {"user_id": id, "message": "Выберите функцию:", "keyboard": key['list']})
     
