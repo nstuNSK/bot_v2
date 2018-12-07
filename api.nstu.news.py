@@ -68,19 +68,23 @@ def send_news(news, vk, type):
 def main():
     vk = auth()
     i = 1
+    f = open("logs.txt", "a")
     while True:
-        print(i)
+        if i == 5:
+            break
+        f.write("time: ", datetime.now())
+        f.write(i)
         i = i+1
         url = get_actual_url()
-        print("New url!!!", url)
+        f.write("New url!!!", url)
         html = get_html(url)
-        print("New html added!!!")
+        f.write("New html added!!!")
         text = html.text
         news = get_json(text)
-        print("News created!!!\n", news)
-        #send_news(news, vk, "schoolchild")
-        #send_news(news, vk, "enrollee")
-        time.sleep(5)
+        f.write("News created!!!")
+        send_news(news, vk, "schoolchild")
+        send_news(news, vk, "enrollee")
+        time.sleep(60*60*60)
         '''for item in news:
         print('Статья: ',item['TITLE'])
         print('ID: ',item['ID'])
