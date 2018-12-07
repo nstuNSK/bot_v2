@@ -85,7 +85,7 @@ def main():
         f.write("News created!!!"+"\n")
         send_news(news, vk, "schoolchild")
         send_news(news, vk, "enrollee")
-        time.sleep(60*60*60)
+        time.sleep(60*60)
         '''for item in news:
         print('Статья: ',item['TITLE'])
         print('ID: ',item['ID'])
