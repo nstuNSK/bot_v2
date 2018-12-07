@@ -9,7 +9,7 @@ import requests
 import database as data
 import getter
 import keyboards
-import api.nstu.news as api
+import api_nstu_news as api
 def auth():
     token = getter.get_token()
     print(token)
