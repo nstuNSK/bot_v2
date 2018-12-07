@@ -9,8 +9,7 @@ import requests
 import database as data
 import getter
 import keyboards
-
-
+import api.nstu.news as api
 def auth():
     token = getter.get_token()
     print(token)
@@ -22,6 +21,7 @@ def subscribe(type, id):
     if data.get_field(connection=connection, table_name="USERS",select_field = type, field="ID_VK", value=id)[0][0]==False:
         data.set_field(connection = connection, table_name = "USERS", ID_VK = id, field = type, value = "1")
         vk.method("messages.send", {"user_id": id, "message": "Теперь я буду отправлять тебе новости! Люблю это😍", 'keyboard': key['main_menu']})
+        api.main()
     else:
         data.set_field(connection = connection, table_name = "USERS", ID_VK = id, field = type, value = "0")
         vk.method("messages.send", {"user_id": id, "message": "Не хочешь, как хочешь...\nНо, если передумаешь, я всегда готов💪🏻", 'keyboard': key['main_menu']})
