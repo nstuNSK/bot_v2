@@ -70,11 +70,10 @@ def send_one_person(id, type):
     html = get_html(url)
     text = html.text
     news = get_json(text)
-    people = get_people(type)
     msgs = create_msgs(news)
     print("Только одному!")
     print("Отправляю новости для: ",type, " на", id)
-    vk.method("messages.send", {"user_id": id[0], "message": "Вот, принес тебе последние новости😊"})
+    vk.method("messages.send", {"user_id": id, "message": "Вот, принес тебе последние новости😊"})
     for msg in msgs:
         vk.method("messages.send", {"user_id": id, "message": msg})
     vk.method("messages.send", {"user_id": id, "message": "Пока все😊"})
