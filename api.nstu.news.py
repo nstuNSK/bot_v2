@@ -72,11 +72,11 @@ def main():
     while True:
         if i == 5:
             break
-        f.write("time: ", datetime.now())
+        f.write("time: " + datetime.now())
         f.write(i)
         i = i+1
         url = get_actual_url()
-        f.write("New url!!!", url)
+        f.write("New url!!! " + url)
         html = get_html(url)
         f.write("New html added!!!")
         text = html.text
