@@ -34,7 +34,7 @@ def get_json(text):
 
 def send_news(news, vk):
     #сначала для школьников
-    people = data.get_fields(connection = connection, table_name = "USERS", select_field = "ID_VK", field = "SUB_S", value = True)
+    people = data.get_field(connection = connection, table_name = "USERS", select_field = "ID_VK", field = "SUB_S", value = True)
     msg = ""
     msgs = []
     for one_news in news:
