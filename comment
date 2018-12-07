@@ -1,0 +1,13 @@
+'''def get_text_html(html):
+    text = html.text
+    text = bytes(text, 'utf-8').decode('unicode-escape')
+    for tag in tags:
+        text = text.replace(tag, '')
+    text = text.replace('<a href="', 'Ссылка: ')
+    text = text.replace('target="_blank"', '')
+    text = text.replace('&mdash;', '-')
+    text = text.replace('&ndash;', '-')
+    text = text.replace('&laquo;', '«')
+    text = text.replace('&raquo;', '»')
+    text = text.replace('&nbsp;', ' ')
+    return text'''
