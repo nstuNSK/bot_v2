@@ -70,8 +70,9 @@ def main():
     i = 1
     f = open("logs.txt", "a")
     while True:
-        if i == 5:
+        if i == 2:
             f.write("end script")
+            f.close()
             break
         f.write("time: " + str(datetime.now())+"\n")
         f.write(str(i)+") ")
@@ -85,7 +86,7 @@ def main():
         f.write("News created!!!"+"\n")
         send_news(news, vk, "schoolchild")
         send_news(news, vk, "enrollee")
-        time.sleep(60*5)
+        time.sleep(30)
         '''for item in news:
         print('Статья: ',item['TITLE'])
         print('ID: ',item['ID'])
