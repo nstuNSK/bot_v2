@@ -61,7 +61,6 @@ def send_news(news, vk, type):
         for msg in msgs:
             vk.method("messages.send", {"user_id": id[0], "message": msg})
         vk.method("messages.send", {"user_id": id[0], "message": "Пока все😊"})
-    people = 
     
 
     
