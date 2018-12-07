@@ -32,9 +32,14 @@ def get_html(url):
 def get_json(text):
     return json.loads(text)
 
-def send_news(news, vk):
-    #сначала для школьников
-    people = data.get_field(connection = connection, table_name = "USERS", select_field = "ID_VK", field = "SUB_S", value = True)
+def get_people(type):
+    if type == "schoolchild":
+        people = data.get_field(connection = connection, table_name = "USERS", select_field = "ID_VK", field = "SUB_S", value = True)
+    else:
+        people = data.get_field(connection = connection, table_name = "USERS", select_field = "ID_VK", field = "SUB_E", value = True)
+    return people
+
+def create_msgs(news):
     msg = ""
     msgs = []
     for one_news in news:
@@ -44,12 +49,19 @@ def send_news(news, vk):
             msgs.append(msg)
             msg = ""
     msgs.append(msg)
+    return msgs
+
+
+def send_news(news, vk, type):
+    people = get_people(type)
+    msgs = create_msgs(news)
     for id in people:
-        print("Отправляю: ", id[0])
+        print("Отправляю новости для: ",type, " на", id[0])
         vk.method("messages.send", {"user_id": id[0], "message": "Вот, принес тебе последние новости😊"})
         for msg in msgs:
             vk.method("messages.send", {"user_id": id[0], "message": msg})
         vk.method("messages.send", {"user_id": id[0], "message": "Пока все😊"})
+    people = 
     
 
     
@@ -60,8 +72,8 @@ def main():
    html = get_html(url)
    text = html.text
    news = get_json(text)
-   send_news(news, vk)
-   
+   send_news(news, vk, "schoolchild")
+   send_news(news, vk, "enrollee")
    '''for item in news:
        print('Статья: ',item['TITLE'])
        print('ID: ',item['ID'])
