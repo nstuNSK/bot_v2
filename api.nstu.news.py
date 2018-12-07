@@ -67,7 +67,10 @@ def send_news(news, vk, type):
     
 def main():
     vk = auth()
+    i = 1
     while True:
+        print(i)
+        i = i+1
         url = get_actual_url()
         print("New url!!!", url)
         html = get_html(url)
