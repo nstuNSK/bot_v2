@@ -10,10 +10,18 @@ from datetime import datetime
 connection = data.connect()
 
 def auth():
+    f = open("logs.txt", "a")
     token = getter.get_token()
-    print(token)
-    vk = vk_api.VkApi(token=token)
-    vk._auth_token()
+    try:
+        vk = vk_api.VkApi(token=token)
+        vk._auth_token()
+        f.write("auth successful!\n")
+    except:
+        vk = None
+        f.write("Error: auth failed!\n")
+        f.close()
+        return vk
+    f.close()
     return vk
 
 vk = auth()
@@ -24,10 +32,14 @@ def get_actual_url():
     return url
 
 def get_html(url):
+    f = open("logs.txt", "a")
     try:
         html = requests.get(url)
     except:
-        html = "bad html"
+        html = None
+        f.write("Error: bad html\n")
+        return html
+    f.close()
     return html
 
 
@@ -55,14 +67,20 @@ def create_msgs(news):
 
 
 def send_news(news, vk, type):
+    f = open("logs.txt", "a")
     people = get_people(type)
     msgs = create_msgs(news)
+    f.write("starting send for " + str(type)+"\n")
     for id in people:
-        print("Отправляю новости для: ",type, " на", id[0])
+        f.write("send to: " + str(id[0])+"\n")
         vk.method("messages.send", {"user_id": id[0], "message": "Вот, принес тебе последние новости😊"})
+        f.write("title msg sended\n")
         for msg in msgs:
             vk.method("messages.send", {"user_id": id[0], "message": msg})
+            f.write("news sended\n")
         vk.method("messages.send", {"user_id": id[0], "message": "Пока все😊"})
+        f.write("footer msg sended\n")
+    f.close()
     
 
 def send_one_person(id, type):
@@ -83,21 +101,23 @@ def main():
     f = open("logs.txt", "a")
     while True:
         if i == 2:
-            f.write("end script")
+            f.write("end script\n////////////")
             f.close()
             break
-        f.write("time: " + str(datetime.now())+"\n")
+        f.write("////////////\nnew log:\ntime: " + str(datetime.now())+"\n")
         f.write(str(i)+") ")
         i = i+1
         url = get_actual_url()
-        f.write("New url!!! " + str(url)+"\n")
+        f.write("url: " + str(url)+"\n")
         html = get_html(url)
-        f.write("New html added!!!"+"\n")
+        f.write("html created"+"\n")
         text = html.text
         news = get_json(text)
-        f.write("News created!!!"+"\n")
-        #send_news(news, vk, "schoolchild")
-        #send_news(news, vk, "enrollee")
+        f.write("news object created"+"\n")
+        send_news(news, vk, "schoolchild")
+        f.write("send to schoolchild finished"+"\n")
+        send_news(news, vk, "enrollee")
+        f.write("send to enrollee finished"+"\n"+"////////////\n \n")
         time.sleep(30)
         '''for item in news:
         print('Статья: ',item['TITLE'])
