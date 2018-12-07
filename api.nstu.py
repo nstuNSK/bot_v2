@@ -26,7 +26,7 @@ def get_field(table_name,field1, field2, value):
 def search_field(table_name, field, value):
     if value != None:
         with connection.cursor() as cursor:
-            sql = "SELECT * FROM Sphere WHERE + '" + str(field) + "' = " +"'"+ str(value)+"'"
+            sql = "SELECT * FROM SPHERE WHERE + '" + str(field) + "' = " +"'"+ str(value)+"'"
             s = cursor.execute(sql)
             if s==0:
                 return False
@@ -47,7 +47,7 @@ def set_line(table_name, values):
         values["PRPFILE_NAME"] = "null"
     if values["data"][0]["SPHERE"] != None:
         for val in values["data"]:
-            sphere = get_field("Sphere","SPHERE","NAME_SPHERE",val["SPHERE"])
+            sphere = get_field("SPHERE","SPHERE","NAME_SPHERE",val["SPHERE"])
             res = res*100 + sphere
     disc2 = get_field("DISC2","DISC2","NAME_SUB",subjects[values["DISC2"]])
     disc3 = get_field("DISC3","DISC3","NAME_SUB",subjects[values["DISC3"]])
