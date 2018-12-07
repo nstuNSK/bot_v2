@@ -38,7 +38,7 @@ def send_news(news, vk):
     msg = ""
     msgs = []
     for one_news in news:
-        if len(msg<3500):
+        if len(msg)<3500:
             msg = msg + "Статья: "+item['TITLE'] + "\nПосмотреть можно здесь: " + item['URL']+"\n \n"
         else:
             msgs.append(msg)
