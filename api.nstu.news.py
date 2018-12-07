@@ -71,17 +71,18 @@ def main():
     f = open("logs.txt", "a")
     while True:
         if i == 5:
+            f.write("end script")
             break
-        f.write("time: " + str(datetime.now()))
-        f.write(str(i))
+        f.write("time: " + str(datetime.now())+"\n")
+        f.write(str(i)+") ")
         i = i+1
         url = get_actual_url()
-        f.write("New url!!! " + str(url))
+        f.write("New url!!! " + str(url)+"\n")
         html = get_html(url)
-        f.write("New html added!!!")
+        f.write("New html added!!!"+"\n")
         text = html.text
         news = get_json(text)
-        f.write("News created!!!")
+        f.write("News created!!!"+"\n")
         send_news(news, vk, "schoolchild")
         send_news(news, vk, "enrollee")
         time.sleep(60*60*60)
