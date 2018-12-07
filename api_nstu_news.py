@@ -99,24 +99,19 @@ def send_one_person(id, type):
 def main():
     i = 1
     f = open("logs.txt", "a")
-    while True:
-        if i == 2:
-            f.write("end log\n \n")
-            break
-        f.write("////////////\nnew log:\ntime: " + str(datetime.now())+"\n")
-        i = i+1
-        url = get_actual_url()
-        f.write("url: " + str(url)+"\n")
-        html = get_html(url)
-        f.write("html created"+"\n")
-        text = html.text
-        news = get_json(text)
-        f.write("news object created"+"\n")
-        send_news(news, vk, "schoolchild")
-        f.write("send to schoolchild finished"+"\n")
-        send_news(news, vk, "enrollee")
-        f.write("send to enrollee finished"+"\n"+"////////////\n \n")
-        time.sleep(30)
+    f.write("////////////\nnew log:\ntime: " + str(datetime.now())+"\n")
+    url = get_actual_url()
+    f.write("url: " + str(url)+"\n")
+    html = get_html(url)
+    f.write("html created"+"\n")
+    text = html.text
+    news = get_json(text)
+    f.write("news object created"+"\n")
+    send_news(news, vk, "schoolchild")
+    f.write("send to schoolchild finished"+"\n")
+    send_news(news, vk, "enrollee")
+    f.write("send to enrollee finished"+"\n"+"////////////\n \n")
+    f.write("end log\n \n")
     f.close()
     '''for item in news:
     print('Статья: ',item['TITLE'])
