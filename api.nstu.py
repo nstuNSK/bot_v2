@@ -52,13 +52,13 @@ def set_line(table_name, values):
     disc2 = get_field("DISC2","DISC2","NAME_SUB",subjects[values["DISC2"]])
     disc3 = get_field("DISC3","DISC3","NAME_SUB",subjects[values["DISC3"]])
     with connection.cursor() as cursor:
-            if search_field("Directions", "ID_DIR", values["ID"]) == False:
+            if search_field("DIRECTIONS", "ID_DIR", values["ID"]) == False:
                 sql = "INSERT INTO " + table_name + "(DESCR, PROFILE_NAME, ID_DIR, FACULT, KEYS_PLUS, DIRECTION, SPHERE, DISC2, DISC3, BALL_K, BALL_B, URL) VALUES ( "+"'"+str(values['DESCR'])+"'"+", "+"'"+str(values['PROFILE_NAME'])+"'"+", "+str(values['ID']) +", '"+str(values['FACULT']) +"', "+" '"+str(values['KEYS_PLUS']) + "', " + " '"+ str(values['DIRECTION'])+"', "+str(res)+", "+str(disc2)+", "+str(disc3)+", "+" "+str(values['BALL_K'])+", "+" "+str(values['BALL_B']) +", "+" '"+"abc'"+")"
                 print(sql)
                 cursor.execute(sql)
                 connection.commit()
             '''else:
-                val = get_field("Directions","SPHERE","ID_DIR",values["ID"])
+                val = get_field("DIRECTIONS","SPHERE","ID_DIR",values["ID"])
                 val = val*100+values["SPHEPE"]
                 sql = "UPDATE "+table_name+" SET SPHERE = '"+str(val)+"' WHERE ID_DIR = '" + str(values["ID"]) + "'"
                 cursor.execute(sql)
@@ -72,7 +72,7 @@ def main():
     api = json.loads(text)
     i = 1
     for item in api:
-            set_line("Directions",item)
+            set_line("DIRECTIONS",item)
 
 if __name__== '__main__':
     main()
