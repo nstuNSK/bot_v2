@@ -101,11 +101,9 @@ def main():
     f = open("logs.txt", "a")
     while True:
         if i == 2:
-            f.write("end script\n////////////")
-            f.close()
+            f.write("end log\n \n")
             break
         f.write("////////////\nnew log:\ntime: " + str(datetime.now())+"\n")
-        f.write(str(i)+") ")
         i = i+1
         url = get_actual_url()
         f.write("url: " + str(url)+"\n")
@@ -119,12 +117,13 @@ def main():
         send_news(news, vk, "enrollee")
         f.write("send to enrollee finished"+"\n"+"////////////\n \n")
         time.sleep(30)
-        '''for item in news:
-        print('Статья: ',item['TITLE'])
-        print('ID: ',item['ID'])
-        print('Ссылка: ',item['URL'])
-        print('Дата: ',item['NEWS_DATE'])
-        print('Коротко: ',item['SHORTTEXT'])'''
+    f.close()
+    '''for item in news:
+    print('Статья: ',item['TITLE'])
+    print('ID: ',item['ID'])
+    print('Ссылка: ',item['URL'])
+    print('Дата: ',item['NEWS_DATE'])
+    print('Коротко: ',item['SHORTTEXT'])'''
 
 if __name__ == "__main__":
     main()
