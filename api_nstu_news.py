@@ -16,6 +16,8 @@ def auth():
     vk._auth_token()
     return vk
 
+vk = auth()
+
 def get_actual_url():
     time = datetime.now()
     url = "https://api.ciu.nstu.ru/v1.0/news/schoolkids/"+str(time.year)+"/"+str(time.month)+"/"+str(time.day)
@@ -63,9 +65,21 @@ def send_news(news, vk, type):
         vk.method("messages.send", {"user_id": id[0], "message": "Пока все😊"})
     
 
-    
+def send_one_person(id, type):
+    url = get_actual_url()
+    html = get_html(url)
+    text = html.text
+    news = get_json(text)
+    people = get_people(type)
+    msgs = create_msgs(news)
+    print("Только одному!")
+    print("Отправляю новости для: ",type, " на", id)
+    vk.method("messages.send", {"user_id": id[0], "message": "Вот, принес тебе последние новости😊"})
+    for msg in msgs:
+        vk.method("messages.send", {"user_id": id, "message": msg})
+    vk.method("messages.send", {"user_id": id, "message": "Пока все😊"})
+
 def main():
-    vk = auth()
     i = 1
     f = open("logs.txt", "a")
     while True:
@@ -83,8 +97,8 @@ def main():
         text = html.text
         news = get_json(text)
         f.write("News created!!!"+"\n")
-        send_news(news, vk, "schoolchild")
-        send_news(news, vk, "enrollee")
+        #send_news(news, vk, "schoolchild")
+        #send_news(news, vk, "enrollee")
         time.sleep(30)
         '''for item in news:
         print('Статья: ',item['TITLE'])
