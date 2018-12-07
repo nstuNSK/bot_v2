@@ -44,10 +44,8 @@ def send_news(news, vk):
             msgs.append(msg)
             msg = ""
     msgs.append(msg)
-    for msg in msgs:
-        print(msg[0])
     for id in people:
-        print("Отправляю: ", id)
+        print("Отправляю: ", id[0])
         #vk.method("messages.send", {"user_id": id, "message": "Вот, принес тебе последние новости😊"})
         #for msg in msgs:
             #vk.method("messages.send", {"user_id": id, "message": msg})
