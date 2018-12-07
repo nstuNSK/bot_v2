@@ -78,12 +78,12 @@ def main():
         #send_news(news, vk, "schoolchild")
         #send_news(news, vk, "enrollee")
         time.sleep(5)
-   '''for item in news:
-       print('Статья: ',item['TITLE'])
-       print('ID: ',item['ID'])
-       print('Ссылка: ',item['URL'])
-       print('Дата: ',item['NEWS_DATE'])
-       print('Коротко: ',item['SHORTTEXT'])'''
+        '''for item in news:
+        print('Статья: ',item['TITLE'])
+        print('ID: ',item['ID'])
+        print('Ссылка: ',item['URL'])
+        print('Дата: ',item['NEWS_DATE'])
+        print('Коротко: ',item['SHORTTEXT'])'''
     
     
 
