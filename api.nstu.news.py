@@ -33,12 +33,12 @@ def main():
    news = get_json(text)
    send_news(news)
    
-   for item in news:
+   '''for item in news:
        print('Статья: ',item['TITLE'])
        print('ID: ',item['ID'])
        print('Ссылка: ',item['URL'])
        print('Дата: ',item['NEWS_DATE'])
-       print('Коротко: ',item['SHORTTEXT'])
+       print('Коротко: ',item['SHORTTEXT'])'''
     
     
 
