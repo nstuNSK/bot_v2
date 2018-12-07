@@ -1,7 +1,11 @@
+import vk_api
 import requests
 import json
 import database as data
+import getter
+import keyboards
 from datetime import datetime
+
 tags = ['<strong>', '</strong>', '<p>', '</p>', '</a>', '>', '\n']
 connection = data.connect()
 
