@@ -1,5 +1,6 @@
 import vk_api
 import requests
+import time
 import json
 import database as data
 import getter
@@ -64,15 +65,19 @@ def send_news(news, vk, type):
     
 
     
-
 def main():
-   vk = auth() 
-   url = get_actual_url()
-   html = get_html(url)
-   text = html.text
-   news = get_json(text)
-   send_news(news, vk, "schoolchild")
-   send_news(news, vk, "enrollee")
+    vk = auth()
+    while True:
+        url = get_actual_url()
+        print("New url!!!", url)
+        html = get_html(url)
+        print("New html added!!!")
+        text = html.text
+        news = get_json(text)
+        print("News created!!!\n", news)
+        #send_news(news, vk, "schoolchild")
+        #send_news(news, vk, "enrollee")
+        time.sleep(5)
    '''for item in news:
        print('Статья: ',item['TITLE'])
        print('ID: ',item['ID'])

@@ -142,7 +142,7 @@ def data_processing(id, pay, msg):
         vk.method("messages.send", {"user_id": id, "message": "Я тебя не понимаю😔\nИспользуй, пожалуйста, клавиатуру🙏🏻", "keyboard": key['main_menu']})
 def get_msg():
     while True:
-        #try:
+        try:
             messages = vk.method("messages.getConversations", {"offset": 0, "count": 100, "filter": "unanswered"})
             if messages["count"] >= 1:
                 id = messages["items"][0]["last_message"]["from_id"]
@@ -159,9 +159,8 @@ def get_msg():
                     pay = "0"
                     print(msg)
                 data_processing(id=id, pay=pay, msg=msg)
-        #except Exception:
-            #print(2)
-            #time.sleep(0.1)
+        except Exception:
+            time.sleep(0.1)
                  
 key = keyboards.get_keyboards() 
 
