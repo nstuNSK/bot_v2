@@ -39,11 +39,13 @@ def send_news(news, vk):
     msgs = []
     for one_news in news:
         if len(msg)<3500:
-            msg = msg + "Статья: "+item['TITLE'] + "\nПосмотреть можно здесь: " + item['URL']+"\n \n"
+            msg = msg + "Статья: "+one_news['TITLE'] + "\nПосмотреть можно здесь: " + one_news['URL']+"\n \n"
         else:
             msgs.append(msg)
             msg = ""
     msgs.append(msg)
+    for msg in msgs:
+        print(msg)
     #for id in people:
         #vk.method("messages.send", {"user_id": id, "message": ""})
     
