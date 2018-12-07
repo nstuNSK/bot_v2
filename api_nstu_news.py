@@ -126,3 +126,5 @@ def main():
         print('Дата: ',item['NEWS_DATE'])
         print('Коротко: ',item['SHORTTEXT'])'''
 
+if __name__ == "__main__":
+    main()
