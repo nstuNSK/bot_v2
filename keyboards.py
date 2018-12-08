@@ -121,7 +121,7 @@ def get_keyboards():
                 get_button(label="Химия",color="default",payload="chemistry")
             ],
             [
-                get_button(label="Главное меню",color="primary",payload="main_menu")
+                get_button(label="Главное меню",color="primary",payload="main_menu"),
                 get_button(label = "Найти", color = "primary", payload = "search_by_subjects")
             ]
         ]
