@@ -156,6 +156,7 @@ def data_processing(id, pay, msg):
             data.set_field(connection = connection, table_name = 'USERS', ID_VK = id, field = 'SUBJECT2', value = subject_id)
         else:
             sb3 = data.get_field(table_name = "USERS", connection = connection, select_field = 'SUBJECT3', field = 'ID_VK', value = id)[0][0]
+            print(sb3)
             if sb3==0:
                 data.set_field(connection = connection, table_name = 'USERS', ID_VK = id, field = 'SUBJECT3', value = subject_id)
                 search_direction_by_subjects(id = id)
