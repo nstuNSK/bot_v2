@@ -43,7 +43,7 @@ def search_direction_by_subjects(id):
         vk.method("messages.send", {"user_id": id, "message": "Понеслась!"})
         response = ""
         for item in res:
-            if item[1]=='null':
+            if item[1]=='None':
                 if item[3]=='null':
                     response = response + "Направление: " + '"' + item[0] + '"' + " на факультете " + item[2]+ "\n" +"Ссылка на направление: " + item[4]+"\n\n"
                 else:
