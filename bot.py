@@ -35,7 +35,7 @@ def search_direction_by_subjects(id):
         res = data.get_field(select_field = "DIRECTION, PROFILE_NAME, FACULT, DESCR, URL",table_name = "DIRECTIONS",connection= connection,value=sb2, field="DISC2") 
         sb3 = data.get_field(select_field = "SUBJECT3",table_name = "USERS",connection= connection,value=id, field="id_vk")[0][0]
         if sb3!=0:
-            temp = data.get_field(select_field = "DIRECTION, PROFILE_NAME, FACULT, DESCR, URL",table_name = "DIRECTIONS",connection= connection,value=sphere2, field="DISC3")
+            temp = data.get_field(select_field = "DIRECTION, PROFILE_NAME, FACULT, DESCR, URL",table_name = "DIRECTIONS",connection= connection,value=sb3, field="DISC3")
             if temp != 0:
                 for item in temp:
                     res.append(item)
@@ -148,7 +148,6 @@ def data_processing(id, pay, msg):
         vk.method("messages.send", {"user_id": id, "message": "По каким предметам будем искать?\nРусский язык нужен для всех направлений, поэтому я его уже добавил😊", "keyboard":key['subjects']})
 
     elif pay == "math" or pay == "biology" or pay == "geography" or pay == "foreign_language" or pay == "informatics" or pay == "history" or pay == "literature" or pay == "social_science" or pay == "physics" or pay == "chemistry":
-        print("tut")
         subject_id = data.get_field(table_name = "SUBJECTS", connection = connection, select_field = 'ID', field = 'SUBJECT', value = pay)[0][0]
         print(subject_id)
         sb2 = data.get_field(table_name = "USERS", connection = connection, select_field = 'SUBJECT2', field = 'ID_VK', value = id)[0][0]
@@ -157,7 +156,6 @@ def data_processing(id, pay, msg):
             data.set_field(connection = connection, table_name = 'USERS', ID_VK = id, field = 'SUBJECT2', value = subject_id)
         else:
             sb3 = data.get_field(table_name = "USERS", connection = connection, select_field = 'SUBJECT3', field = 'ID_VK', value = id)[0][0]
-            print(sb3)
             if sb3==0:
                 data.set_field(connection = connection, table_name = 'USERS', ID_VK = id, field = 'SUBJECT3', value = subject_id)
                 search_direction_by_subjects(id = id)
