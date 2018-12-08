@@ -26,6 +26,7 @@ def subscribe(type, id):
         vk.method("messages.send", {"user_id": id, "message": "Не хочешь, как хочешь...\nНо, если передумаешь, я всегда готов💪🏻", 'keyboard': key['main_menu']})
 
 def search_direction_by_subjects(id):
+    print("yeah!")
     res = []
     sb2 = data.get_field(select_field = "SUBJECT2",table_name = "USERS",connection= connection,value=id, field="id_vk")[0][0]
     if sb2 == 0:
