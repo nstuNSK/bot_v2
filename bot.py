@@ -147,7 +147,9 @@ def data_processing(id, pay, msg):
         vk.method("messages.send", {"user_id": id, "message": "По каким предметам будем искать?\nРусский язык нужен для всех направлений, поэтому я его уже добавил😊", "keyboard":key['subjects']})
 
     elif pay == "math" or pay == "biology" or pay == "geography" or pay == "foreign_language" or pay == "informatics" or pay == "history" or pay == "literature" or pay == "social_science" or pay == "physics" or pay == "chemistry":
+        print("tut")
         subject_id = data.get_field(table_name = "SUBJECTS", connection = connection, select_field = 'ID', field = 'SUBJECT', value = pay)[0][0]
+        print(subject_id)
         sb2 = data.get_field(table_name = "USERS", connection = connection, select_field = 'SUBJECT2', field = 'ID_VK', value = id)[0][0]
         if sb2==0:
             vk.method("messages.send", {"user_id": id, "message": "Плюс один😉", "keyboard":key['subjects']})
