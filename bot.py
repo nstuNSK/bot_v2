@@ -82,6 +82,9 @@ def data_processing(id, pay, msg):
     elif msg=="admin":
         vk.method("messages.send", {"user_id": id, "message": "Опять по новой? Ну, ладно...", "keyboard":key['start']})
     
+    elif pay == "main_menu":
+        vk.method("messages.send", {"user_id": id, "message": "Сделал!", "keyboard":key['main_menu']})
+
     elif pay=="subscribe":
         vk.method("messages.send", {"user_id": id, "message": "Какие новости нас интересуют?", "keyboard":key['subscribe']})
     
@@ -133,6 +136,11 @@ def data_processing(id, pay, msg):
         vk.method("messages.send", {"user_id": id, "message": "Меня пока что этому не научили😞\nНо совсем скоро научат, обещаю!", "keyboard": key['main_menu']})
         #vk.method("messages.send", {"user_id": id, "message": "Как часто мне отправлять тебе новости?", "keyboard": key['frequency']})
     
+    #elif pay == "one_per_day":
+        #vk.method("messages.send", {"user_id": id, "message": "Я буду отправлять тебе", "keyboard":key['main_menu']})
+
+    #elif pay == "two_per_day":
+        #vk.method("messages.send", {"user_id": id, "message": "Опять по новой? Ну, ладно...", "keyboard":key['main_menu']})
     elif msg == "Бу!":
         vk.method("messages.send", {"user_id": id, "message": "Аааа!"})
         vk.method("messages.send", {"user_id": id, "message": "А, это ты😃"})
