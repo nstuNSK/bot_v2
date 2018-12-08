@@ -25,7 +25,25 @@ def subscribe(type, id):
         data.set_field(connection = connection, table_name = "USERS", ID_VK = id, field = type, value = "0")
         vk.method("messages.send", {"user_id": id, "message": "Не хочешь, как хочешь...\nНо, если передумаешь, я всегда готов💪🏻", 'keyboard': key['main_menu']})
 
-def search_direction(id):
+def search_direction_by_subjects(id):
+    res = []
+    sb2 = data.get_field(select_field = "SUBJECT2",table_name = "USERS",connection= connection,value=id, field="id_vk")[0][0]
+    if sb2 == 0:
+        vk.method("messages.send", {"user_id": id, "message": "Кажется ты забыл выбрать предметы... Давай, исправляйся😊", "keyboard":key['subjects']})
+    else:
+        res = data.get_field(select_field = "DIRECTION, PROFILE_NAME, FACULT, DESCR, URL",table_name = "DIRECTIONS",connection= connection,value=sb2, field="DISC2") 
+        sb3 = data.get_field(select_field = "SUBJECT3",table_name = "USERS",connection= connection,value=id, field="id_vk")[0][0]
+        if sb3!=0:
+            temp = data.get_field(select_field = "DIRECTION, PROFILE_NAME, FACULT, DESCR, URL",table_name = "DIRECTIONS",connection= connection,value=sphere2, field="DISC3")
+            if temp != 0:
+                for item in temp:
+                    res.append(item)
+        res = list(set(res))
+        for item in res:
+            print(item)
+        vk.method("messages.send", {"user_id": id, "message": "Вооооп", "keyboard":key['main_menu']})
+
+def search_direction_by_sphere(id):
     res = []
     sphere1 = data.get_field(select_field = "SPHERE1",table_name = "USERS",connection= connection,value=id, field="id_vk")[0][0]
     if sphere1 == 0:
@@ -119,13 +137,33 @@ def data_processing(id, pay, msg):
                 if sphere3 == 0:
                     vk.method("messages.send", {"user_id": id, "message": "Изи добавил!", "keyboard":key['sphere']})
                     data.set_field(connection = connection, table_name = 'USERS', ID_VK = id, field = 'SPHERE3', value = sphere_id)
-                    search_direction(id)
+                    search_direction_by_sphere(id = id)
         
    
-    elif pay == "search":
-        search_direction(id = id)
-    elif pay == "name_dir":
-        vk.method("messages.send", {"user_id": id, "message": "Меня пока что этому не научили😞\nНо совсем скоро научат, обещаю!", "keyboard": key['main_menu']})
+    elif pay=="name_dir":
+        data.set_field(connection = connection, table_name = "USERS", ID_VK = id, field = "SUBJECT2", value = 0)
+        data.set_field(connection = connection, table_name = "USERS", ID_VK = id, field = "SUBJECT3", value = 0)
+        data.set_field(connection = connection, table_name = "USERS", ID_VK = id, field = "SUBJECT4", value = 0)
+        vk.method("messages.send", {"user_id": id, "message": "По каким предметам будем искать?\nРусский язык нужен для всех направлений, поэтому я его уже добавил😊", "keyboard":key['subjects']})
+
+    elif pay == "math" or pay == "biology" or pay == "geography" or pay == "foreign_language" or pay == "informatics" or pay == "history" or pay == "literature" or pay == "social_science" or pay == "physics" or pay == "chemistry":
+        subject_id = data.get_field(table_name = "SUBJECTS", connection = connection, select_field = 'ID', field = 'SUBJECT', value = pay)[0][0]
+        sb2 = data.get_field(table_name = "USERS", connection = connection, select_field = 'SUBJECT2', field = 'ID_VK', value = id)[0][0]
+        if sb2==0:
+            vk.method("messages.send", {"user_id": id, "message": "Плюс один😉", "keyboard":key['subjects']})
+            data.set_field(connection = connection, table_name = 'USERS', ID_VK = id, field = 'SUBJECT2', value = subject_id)
+        else:
+            sb3 = data.get_field(table_name = "USERS", connection = connection, select_field = 'SUBJECT3', field = 'ID_VK', value = id)[0][0]
+            if sb3==0:
+                data.set_field(connection = connection, table_name = 'USERS', ID_VK = id, field = 'SUBJECT3', value = subject_id)
+                search_direction_by_subjects(id = id)
+    
+    elif pay == "search_by_sphere":
+        search_direction_by_sphere(id = id)
+    elif pay == "search_by_subjects":
+        search_direction_by_subjects(id = id)
+    #elif pay == "name_dir":
+        #vk.method("messages.send", {"user_id": id, "message": "Меня пока что этому не научили😞\nНо совсем скоро научат, обещаю!", "keyboard": key['main_menu']})
     elif pay == "lists":
         vk.method("messages.send", {"user_id": id, "message": "Выберите функцию:", "keyboard": key['list']})
     

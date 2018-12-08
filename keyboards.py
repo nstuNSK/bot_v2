@@ -94,7 +94,7 @@ def get_keyboards():
             ],
             [
                 get_button(label="Главное меню",color="primary",payload="main_menu"),
-                get_button(label = "Найти", color = "primary", payload = "search")
+                get_button(label = "Найти", color = "primary", payload = "search_by_sphere")
             ]
         ]
     }
@@ -104,11 +104,7 @@ def get_keyboards():
     keyboard_subjects = {
         "one_time": True,
         "buttons":[
-            [
-                get_button(label="Русский язык",color="default",payload="russian"),
                 get_button(label="Математика",color="default",payload="math")
-            ],
-            [
                 get_button(label="Биология",color="default",payload="biology"),
                 get_button(label="География",color="default",payload="geography"),
                 get_button(label="Иностранный язык",color="default",payload="foreign_language")
@@ -125,6 +121,7 @@ def get_keyboards():
             ],
             [
                 get_button(label="Главное меню",color="primary",payload="main_menu")
+                get_button(label = "Найти", color = "primary", payload = "search_by_subjects")
             ]
         ]
     }
