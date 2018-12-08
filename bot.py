@@ -40,9 +40,25 @@ def search_direction_by_subjects(id):
                 for item in temp:
                     res.append(item)
         res = list(set(res))
+        vk.method("messages.send", {"user_id": id, "message": "Понеслась!"})
+        response = ""
         for item in res:
-            print(item)
-        vk.method("messages.send", {"user_id": id, "message": "Вооооп", "keyboard":key['main_menu']})
+            if item[1]=='null':
+                if item[3]=='null':
+                    response = response + "Направление: " + '"' + item[0] + '"' + " на факультете " + item[2]+ "\n" +"Ссылка на направление: " + item[4]+"\n\n"
+                else:
+                    response = response + "Направление: " + '"' + item[0] + '"' + " на факультете " + item[2]+ "\n" +item[3] + "\n" +"Ссылка на направление: " + item[4]+"\n\n"
+            else:
+                if item[3]=='null':
+                    response = response + "Направление: " + '"' + item[0] + ' (' + item[1] + ')' + '"' + " на факультете " + item[2]+ "\n" +"Ссылка на направление: " + item[4]+"\n\n"
+                else:
+                    response = response + "Направление: " + '"' + item[0] + ' (' + item[1] + ')' + '"' + " на факультете " + item[2]+ "\n" +item[3] + "\n" +"Ссылка на направление: " + item[4]+"\n\n"
+            if(len(response)>3500):
+                vk.method("messages.send", {"user_id": id,"message": response})
+                response = ""
+        if(response!=""):
+            vk.method("messages.send", {"user_id": id,"message": response})
+        vk.method("messages.send", {"user_id": id,"message": "Заставил же ты меня потрудиться!😁", 'keyboard': key['main_menu']})
 
 def search_direction_by_sphere(id):
     res = []
