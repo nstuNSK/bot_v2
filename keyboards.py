@@ -104,6 +104,7 @@ def get_keyboards():
     keyboard_subjects = {
         "one_time": True,
         "buttons":[
+            [
                 get_button(label="Математика",color="default",payload="math"),
                 get_button(label="Биология",color="default",payload="biology"),
                 get_button(label="География",color="default",payload="geography"),
