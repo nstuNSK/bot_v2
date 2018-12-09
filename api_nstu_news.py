@@ -75,6 +75,7 @@ def send_news(news, vk, type):
     f = open("logs.txt", "a")
     people = get_people(type)
     f.write("starting send for " + str(type)+"\n")
+    print(people)
     for id in people:
         msgs = create_msgs(news, vk, id[0])
         f.write("send to: " + str(id[0])+"\n")
