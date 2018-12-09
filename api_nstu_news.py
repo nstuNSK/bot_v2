@@ -56,7 +56,7 @@ def get_people(type):
 def create_msgs(news, vk, id):
     msg = ""
     msgs = []
-    last_news = data.get_field(connection = connection, table_name = "USERS", select_field = "LAST_NEWS", field = "ID_VK", value = id)
+    last_news = data.get_field(connection = connection, table_name = "USERS", select_field = "LAST_NEWS", field = "ID_VK", value = id)[0][0]
     date = last_news[0:10]
     time = last_news[11:len(last_news)]
     print(date)
