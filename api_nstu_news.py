@@ -56,18 +56,21 @@ def get_people(type):
 def create_msgs(news, vk, id):
     msg = ""
     msgs = []
-    last_news = data.get_field(connection = connection, table_name = "USERS", select_field = "LAST_NEWS", field = "ID_VK", value = id)[0][0]
-    date = last_news[0:10]
-    time = last_news[11:len(last_news)]
-    print(date)
-    print(time)
-    for one_news in news:
-        if len(msg)<3500:
-            msg = msg + "Статья: "+one_news['TITLE'] + "\nПосмотреть можно здесь: " + one_news['URL']+"\n \n"
-        else:
-            msgs.append(msg)
-            msg = ""
-    msgs.append(msg)
+    last_send_news = data.get_field(connection = connection, table_name = "USERS", select_field = "LAST_NEWS", field = "ID_VK", value = id)[0][0]
+    date = last_send_news[0:10]
+    time = last_send_news[11:len(date)]
+    date = date + " " + time
+    date_last_news = news[0]["DATE_NEWS"]
+    if date < date_last_news:
+        new_last_news = news[0]["DATE_NEWS"]
+        data.set_field(connection = connection, table_name = "USERS", ID_VK = id, field = "LAST_NEWS", value = new_last_news)
+        for one_news in news:
+            if len(msg)<3500:
+                msg = msg + "Статья: "+one_news['TITLE'] + "\nПосмотреть можно здесь: " + one_news['URL']+"\n \n"
+            else:
+                msgs.append(msg)
+                msg = ""
+        msgs.append(msg)
     return msgs
 
 
@@ -75,7 +78,6 @@ def send_news(news, vk, type):
     f = open("logs.txt", "a")
     people = get_people(type)
     f.write("starting send for " + str(type)+"\n")
-    print(people)
     if people != 0:
         for id in people:
             msgs = create_msgs(news, vk, id[0])
@@ -90,18 +92,18 @@ def send_news(news, vk, type):
     f.close()
     
 
-def send_one_person(id, type):
-    url = get_actual_url()
-    html = get_html(url)
-    text = html.text
-    news = get_json(text)
-    msgs = create_msgs(news, vk)
-    print("Только одному!")
-    print("Отправляю новости для: ",type, " на", id)
-    vk.method("messages.send", {"user_id": id, "message": "Вот, принес тебе последние новости😊"})
-    for msg in msgs:
-        vk.method("messages.send", {"user_id": id, "message": msg})
-    vk.method("messages.send", {"user_id": id, "message": "Пока все😊"})
+#def send_one_person(id, type):
+    #url = get_actual_url()
+    #html = get_html(url)
+    #text = html.text
+    #news = get_json(text)
+    #msgs = create_msgs(news, vk)
+    #print("Только одному!")
+    #print("Отправляю новости для: ",type, " на", id)
+    #vk.method("messages.send", {"user_id": id, "message": "Вот, принес тебе последние новости😊"})
+    #for msg in msgs:
+        #vk.method("messages.send", {"user_id": id, "message": msg})
+    #vk.method("messages.send", {"user_id": id, "message": "Пока все😊"})
 
 def main():
     i = 1
