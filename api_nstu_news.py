@@ -70,6 +70,7 @@ def create_msgs(news, vk, id):
                 msg = ""
         msgs.append(msg)
         data.set_complex_str_in_field(connection = connection, table_name = "USERS", ID_VK = id, field = "LAST_NEWS", value = new_last_news)
+    print(msgs)
     return msgs
 
 
