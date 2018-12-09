@@ -56,11 +56,10 @@ def get_people(type):
 def create_msgs(news, vk, id):
     msg = ""
     msgs = []
-    last_news = data.get_field(connection = connection, table_name = "USERS", select_field = "ID_VK", field = "LAST_NEWS", value = id)
-    date = last_news.date
-    print(date)
-    time = last_news.time
-    print(time)
+    last_news = data.get_field(connection = connection, table_name = "USERS", select_field = "LAST_NEWS", field = "ID_VK", value = id)
+    date = last_news[0:10]
+    time = last_news[11:len(last_news)]
+    print(date + "\n" + time)
     for one_news in news:
         if len(msg)<3500:
             msg = msg + "Статья: "+one_news['TITLE'] + "\nПосмотреть можно здесь: " + one_news['URL']+"\n \n"
