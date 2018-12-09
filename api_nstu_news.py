@@ -58,16 +58,16 @@ def create_msgs(news, vk, id):
     msgs = []
     date = data.get_field(connection = connection, table_name = "USERS", select_field = "LAST_NEWS", field = "ID_VK", value = id)[0][0]
     date_last_news = news[0]["NEWS_DATE"][0:10]+" "+news[0]["NEWS_DATE"][11:len(news[0]["NEWS_DATE"])]
-        for one_news in news:
-            date_news = one_news["NEWS_DATE"][0:10]+" "+one_news["NEWS_DATE"][11:len(one_news["NEWS_DATE"])]
-            if date < date_news:
-                if len(msg)<3500:
-                    msg = msg + "Статья: "+one_news['TITLE'] + "\nПосмотреть можно здесь: " + one_news['URL']+"\n \n"
-                else:
-                    msgs.append(msg)
-                    msg = ""
+    for one_news in news:
+        date_news = one_news["NEWS_DATE"][0:10]+" "+one_news["NEWS_DATE"][11:len(one_news["NEWS_DATE"])]
+        if date < date_news:
+            if len(msg)<3500:
+                msg = msg + "Статья: "+one_news['TITLE'] + "\nПосмотреть можно здесь: " + one_news['URL']+"\n \n"
+            else:
+                msgs.append(msg)
+                msg = ""
         msgs.append(msg)
-        data.set_complex_str_in_field(connection = connection, table_name = "USERS", ID_VK = id, field = "LAST_NEWS", value = new_last_news)
+        data.set_complex_str_in_field(connection = connection, table_name = "USERS", ID_VK = id, field = "LAST_NEWS", value = date_last_news)
     print(msgs)
     return msgs
 
