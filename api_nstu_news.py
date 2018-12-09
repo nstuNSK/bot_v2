@@ -63,7 +63,6 @@ def create_msgs(news, vk, id):
     date_last_news = news[0]["DATE_NEWS"]
     if date < date_last_news:
         new_last_news = news[0]["DATE_NEWS"]
-        data.set_field(connection = connection, table_name = "USERS", ID_VK = id, field = "LAST_NEWS", value = new_last_news)
         for one_news in news:
             if len(msg)<3500:
                 msg = msg + "Статья: "+one_news['TITLE'] + "\nПосмотреть можно здесь: " + one_news['URL']+"\n \n"
@@ -71,6 +70,7 @@ def create_msgs(news, vk, id):
                 msgs.append(msg)
                 msg = ""
         msgs.append(msg)
+        data.set_field(connection = connection, table_name = "USERS", ID_VK = id, field = "LAST_NEWS", value = new_last_news)
     return msgs
 
 
