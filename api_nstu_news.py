@@ -106,7 +106,8 @@ def main():
     f.write("html created"+"\n")
     text = html.text
     news = get_json(text)
-    print(news)
+    if news == []:
+        print(news)
     f.write("news object created"+"\n")
     send_news(news, vk, "schoolchild")
     f.write("send to schoolchild finished"+"\n")
