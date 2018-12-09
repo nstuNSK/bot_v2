@@ -17,7 +17,7 @@ def set_user(table_name,connection,ID_VK):
     if search_field(table_name, connection, ID_VK , "ID_VK")==False:
         try:
             with connection.cursor() as cursor:
-                sql = "INSERT INTO " + table_name + " (ID_VK) VALUES (%s)"
+                sql = "INSERT INTO " + table_name + " (ID_VK, LAST_NEWS) VALUES (%s, '2017-01-01 00:00:00')"
                 print(sql)
                 str = cursor.execute(sql,(ID_VK))
                 connection.commit()
