@@ -106,7 +106,7 @@ def main():
     f.write("html created"+"\n")
     text = html.text
     news = get_json(text)
-    last_news = news[0]['LAST_NEWS']
+    last_news = news[0]['NEWS_DATE']
     print(last_news)
     if news != []:
         f.write("news object created"+"\n")
