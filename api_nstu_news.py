@@ -57,9 +57,9 @@ def create_msgs(news, vk, id):
     msg = ""
     msgs = []
     last_news = data.get_field(connection = connection, table_name = "USERS", select_field = "ID_VK", field = "LAST_NEWS", value = id)
-    date = last_news[0:10]
+    date = last_news.date
     print(date)
-    time = last_news[11:len(last_news)]
+    time = last_news.time
     print(time)
     for one_news in news:
         if len(msg)<3500:
