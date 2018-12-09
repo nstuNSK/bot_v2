@@ -76,16 +76,17 @@ def send_news(news, vk, type):
     people = get_people(type)
     f.write("starting send for " + str(type)+"\n")
     print(people)
-    for id in people:
-        msgs = create_msgs(news, vk, id[0])
-        f.write("send to: " + str(id[0])+"\n")
-        vk.method("messages.send", {"user_id": id[0], "message": "Вот, принес тебе последние новости😊"})
-        f.write("title msg sended\n")
-        for msg in msgs:
-            vk.method("messages.send", {"user_id": id[0], "message": msg})
-            f.write("news sended\n")
-        vk.method("messages.send", {"user_id": id[0], "message": "Пока все😊"})
-        f.write("footer msg sended\n")
+    if people != 0:
+        for id in people:
+            msgs = create_msgs(news, vk, id[0])
+            f.write("send to: " + str(id[0])+"\n")
+            vk.method("messages.send", {"user_id": id[0], "message": "Вот, принес тебе последние новости😊"})
+            f.write("title msg sended\n")
+            for msg in msgs:
+                vk.method("messages.send", {"user_id": id[0], "message": msg})
+                f.write("news sended\n")
+            vk.method("messages.send", {"user_id": id[0], "message": "Пока все😊"})
+            f.write("footer msg sended\n")
     f.close()
     
 
