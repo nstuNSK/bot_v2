@@ -116,7 +116,6 @@ def main():
     f.write("html created"+"\n")
     text = html.text
     news = get_json(text)
-    last_news = news[0]['NEWS_DATE']
     if news != []:
         f.write("news object created"+"\n")
         send_news(news, vk, "schoolchild")
