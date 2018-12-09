@@ -106,13 +106,14 @@ def main():
     f.write("html created"+"\n")
     text = html.text
     news = get_json(text)
-    if news == []:
-        print(news)
-    f.write("news object created"+"\n")
-    send_news(news, vk, "schoolchild")
-    f.write("send to schoolchild finished"+"\n")
-    send_news(news, vk, "enrollee")
-    f.write("send to enrollee finished"+"\n"+"////////////\n \n")
+    if news != []:
+        f.write("news object created"+"\n")
+        send_news(news, vk, "schoolchild")
+        f.write("send to schoolchild finished"+"\n")
+        send_news(news, vk, "enrollee")
+        f.write("send to enrollee finished"+"\n"+"////////////\n \n")
+    else:
+         f.write("News are empty\n")
     f.write("end log\n \n")
     f.close()
     '''for item in news:
