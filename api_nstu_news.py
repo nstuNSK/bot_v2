@@ -53,9 +53,14 @@ def get_people(type):
         people = data.get_field(connection = connection, table_name = "USERS", select_field = "ID_VK", field = "SUB_E", value = True)
     return people
 
-def create_msgs(news):
+def create_msgs(news, vk):
     msg = ""
     msgs = []
+    last_news = data.get_field(connection = connection, table_name = "USERS", select_field = "ID_VK", field = "LAST_NEWS", value = True)
+    date = last_news[0:10]
+    print(date)
+    time = last_news[11:len(last_news)]
+    print(time)
     for one_news in news:
         if len(msg)<3500:
             msg = msg + "Статья: "+one_news['TITLE'] + "\nПосмотреть можно здесь: " + one_news['URL']+"\n \n"
@@ -69,7 +74,7 @@ def create_msgs(news):
 def send_news(news, vk, type):
     f = open("logs.txt", "a")
     people = get_people(type)
-    msgs = create_msgs(news)
+    msgs = create_msgs(news, vk)
     f.write("starting send for " + str(type)+"\n")
     for id in people:
         f.write("send to: " + str(id[0])+"\n")
@@ -107,12 +112,11 @@ def main():
     text = html.text
     news = get_json(text)
     last_news = news[0]['NEWS_DATE']
-    print(last_news)
     if news != []:
-        f.write("news object created"+"\n")
+        f.write("news object created"+"\n", last_news)
         send_news(news, vk, "schoolchild")
         f.write("send to schoolchild finished"+"\n")
-        send_news(news, vk, "enrollee")
+        send_news(news, vk, "enrollee", last_news)
         f.write("send to enrollee finished"+"\n"+"////////////\n \n")
     else:
          f.write("News are empty\n")
