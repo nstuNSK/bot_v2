@@ -69,8 +69,8 @@ def create_msgs(news, vk, id):
                 msgs.append(msg)
                 msg = ""
     msgs.append(msg)
-    data.set_complex_str_in_field(connection = connection, table_name = "USERS", ID_VK = id, field = "LAST_NEWS", value = date_last_news)
-    print(msgs)
+    if date<date_last_news:
+        data.set_complex_str_in_field(connection = connection, table_name = "USERS", ID_VK = id, field = "LAST_NEWS", value = date_last_news)
     return msgs
 
 
