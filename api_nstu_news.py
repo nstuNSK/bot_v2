@@ -82,7 +82,7 @@ def send_news(news, vk, type):
         for id in people:
             msgs = create_msgs(news, vk, id[0])
             print(msgs)
-            if msgs!=[]:
+            if msgs!=[] and msgs!=['']:
                 f.write("send to: " + str(id[0])+"\n")
                 vk.method("messages.send", {"user_id": id[0], "message": "Вот, принес тебе последние новости😊"})
                 f.write("title msg sended\n")
