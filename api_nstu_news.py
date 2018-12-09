@@ -28,7 +28,7 @@ vk = auth()
 
 def get_actual_url():
     time = datetime.now()
-    url = "https://api.ciu.nstu.ru/v1.0/news/schoolkids/"+str(time.year)+"/"+str(time.month)+"/"+str(time.day)
+    url = "https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/4"#+str(time.year)+"/"+str(time.month)+"/"+str(time.day)
     return url
 
 def get_html(url):
