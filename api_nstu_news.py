@@ -60,6 +60,8 @@ def create_msgs(news, vk, id):
     date_last_news = news[0]["NEWS_DATE"][0:10]+" "+news[0]["NEWS_DATE"][11:len(news[0]["NEWS_DATE"])]
     for one_news in news:
         date_news = one_news["NEWS_DATE"][0:10]+" "+one_news["NEWS_DATE"][11:len(one_news["NEWS_DATE"])]
+        print(date)
+        print(date_news)
         if date < date_news:
             if len(msg)<3500:
                 msg = msg + "Статья: "+one_news['TITLE'] + "\nПосмотреть можно здесь: " + one_news['URL']+"\n \n"
