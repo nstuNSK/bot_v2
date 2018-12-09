@@ -57,7 +57,7 @@ def create_msgs(news, vk, id):
     msg = ""
     msgs = []
     date = data.get_field(connection = connection, table_name = "USERS", select_field = "LAST_NEWS", field = "ID_VK", value = id)[0][0]
-    date_last_news = news[0]["NEWS_DATE"][0][10]+" "+news[0]["NEWS_DATE"][11][len(news[0]["NEWS_DATE"])]
+    date_last_news = news[0]["NEWS_DATE"][0:10]+" "+news[0]["NEWS_DATE"][11:len(news[0]["NEWS_DATE"])]
     print(date)
     print(date_last_news)
     if date < date_last_news:
