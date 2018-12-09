@@ -47,6 +47,12 @@ def get_field(connection,table_name,select_field,field,value):
             return list(cursor.fetchall())
             #return cursor.fetchall()
 
+def set_complex_str_in_field(connection, table_name, ID_VK, field, value):
+    with connection.cursor() as cursor:
+        sql = "UPDATE " + table_name + " SET " + field + " = " +"'"+str(value)+"'"+ " WHERE ID_VK = %s"
+        r = cursor.execute(sql, (ID_VK))
+        connection.commit()
+
 def set_field(connection, table_name, ID_VK, field, value):
     with connection.cursor() as cursor:
         sql = "UPDATE " + table_name + " SET " + field + " = " + str(value) + " WHERE ID_VK = %s"
