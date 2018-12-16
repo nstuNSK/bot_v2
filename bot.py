@@ -80,7 +80,7 @@ def search_direction_by_sphere(id):
             vk.method("messages.send", {"user_id": id,"message": response})
         vk.method("messages.send", {"user_id": id,"message": "Искал как в последний раз😂", 'keyboard': key['main_menu']})
     else:
-        vk.method("messages.send", {"user_id": id,"message":"А сферы я за тебя добавлять буду?", 'keyboard': key['sphere']}})
+        vk.method("messages.send", {"user_id": id,"message":"А сферы я за тебя добавлять буду?", 'keyboard': key['sphere']})
 
 def add_sphere(id, connection, pay):
     sql = "SELECT ID FROM SPHERES WHERE NAME = '"+str(pay)+"'"
