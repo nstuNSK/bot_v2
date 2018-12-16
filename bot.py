@@ -82,6 +82,13 @@ def search_direction_by_sphere(id):
         vk.method("messages.send", {"user_id": id,"message": "Искал как в последний раз😂", 'keyboard': key['main_menu']})
 
 
+def add_sphere(id, connection):
+    sql = "SELECT ID FROM SPHERES WHERE NAME = '"+str(pay)+"'"
+    idSph = data.executeSQL(sql = sql, connection = connection)
+    sql = "INSERT INTO USERS_SPHERES (ID_USER, ID_SPHERE) VALUES("+str(id)+", "+str(idSph[0][0])+")"
+    data.executeSQL(sql = sql, connection = connection)
+    vk.method("messages.send", {"user_id": id, "message": random.choice(msg), "keyboard":key['sphere']})
+
 #WAIT_FILLING_POINTS = "-3"
 #WAIT_FILLING = "-2"
 #TEMP_FILLING = "-1"
@@ -123,16 +130,14 @@ def data_processing(id, pay, msg):
         msg = ["Добавил! Это было легко😉", "Проще простого! Добавил!", "Изи добавил!"]
         sql = "SELECT ID_SPHERE FROM USERS_SPHERES WHERE ID_USER = "+str(id)
         size = data.executeSQL(sql = sql, connection = connection)
-        print(size)
         if size!=0:
+            print(len(size))
             if len(size) < 3:
-                sql = "SELECT ID FROM SPHERES WHERE NAME = '"+str(pay)+"'"
-                idSph = data.executeSQL(sql = sql, connection = connection)
-                sql = "INSERT INTO USERS_SPHERES (ID_USER, ID_SPHERE) VALUES("+str(id)+", "+str(idSph[0][0])+")"
-                data.executeSQL(sql = sql, connection = connection)
-                vk.method("messages.send", {"user_id": id, "message": random.choice(msg), "keyboard":key['sphere']})
+                add_sphere(id=id,connection=connection)
                 if len(size)+1>=3:
                     search_direction_by_sphere(id = id)
+        else:
+            add_sphere(id=id,connection=connection)
         
    
     elif pay=="name_dir":
@@ -181,6 +186,7 @@ def data_processing(id, pay, msg):
         vk.method("messages.send", {"user_id": id, "message": "Не пугай меня так больше🙏🏻", "keyboard": key['main_menu']})
     else:
         vk.method("messages.send", {"user_id": id, "message": "Я тебя не понимаю😔\nИспользуй, пожалуйста, клавиатуру🙏🏻", "keyboard": key['main_menu']})
+
 def get_msg():
     while True:
         try:
