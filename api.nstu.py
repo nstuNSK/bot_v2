@@ -19,14 +19,12 @@ def get_field(table_name,field1, field2, value):
     with connection.cursor() as cursor:
         sql = "SELECT " + field1 + " FROM " + table_name + " WHERE " + field2 + " = %s"
         print(sql)
-        print(value)
-        str = cursor.execute(sql,(value))
-        print("////////////////////////////////////////")
+        cursor.execute(sql,(value))
         return list(cursor.fetchone())[0]
 def search_field(table_name, field, value):
     if value != None:
         with connection.cursor() as cursor:
-            sql = "SELECT * FROM SPHERE WHERE + '" + str(field) + "' = " +"'"+ str(value)+"'"
+            sql = "SELECT * FROM "+table_name+" WHERE + " + str(field) + " = " + str(value)
             s = cursor.execute(sql)
             if s==0:
                 return False
@@ -44,13 +42,7 @@ def set_line(table_name, values):
     if values["DESCR"] == None:
         values["DESCR"] = "null"
     if values["PROFILE_NAME"]==None:
-        values["PRPFILE_NAME"] = "null"
-    if values["data"][0]["SPHERE"] != None:
-        for val in values["data"]:
-            sphere = get_field("SPHERE","SPHERE","NAME_SPHERE",val["SPHERE"])
-            res = res*100 + sphere
-    disc2 = get_field("DISC2","DISC2","NAME_SUB",subjects[values["DISC2"]])
-    disc3 = get_field("DISC3","DISC3","NAME_SUB",subjects[values["DISC3"]])
+        values["PROFILE_NAME"] = "null"
     with connection.cursor() as cursor:
             if search_field("DIRECTIONS", "ID_DIR", values["ID"]) == False:
                 sql = "INSERT INTO " + table_name + "(DESCR, PROFILE_NAME, ID_DIR, FACULT, KEYS_PLUS, DIRECTION, SPHERE, DISC2, DISC3, BALL_K, BALL_B, URL) VALUES ( "+"'"+str(values['DESCR'])+"'"+", "+"'"+str(values['PROFILE_NAME'])+"'"+", "+str(values['ID']) +", '"+str(values['FACULT']) +"', "+" '"+str(values['KEYS_PLUS']) + "', " + " '"+ str(values['DIRECTION'])+"', "+str(res)+", "+str(disc2)+", "+str(disc3)+", "+" "+str(values['BALL_K'])+", "+" "+str(values['BALL_B']) +","+"'"+str(values['URL'])+"')"
