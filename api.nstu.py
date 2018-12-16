@@ -45,7 +45,7 @@ def set_line(table_name, values):
         values["PROFILE_NAME"] = "null"
     with connection.cursor() as cursor:
             if search_field("DIRECTIONS", "ID_DIR", values["ID"]) == False:
-                sql = "INSERT INTO " + table_name + "(DESCR, PROFILE_NAME, ID_DIR, FACULT, KEYS_PLUS, DIRECTION, SPHERE, DISC2, DISC3, BALL_K, BALL_B, URL) VALUES ( "+"'"+str(values['DESCR'])+"'"+", "+"'"+str(values['PROFILE_NAME'])+"'"+", "+str(values['ID']) +", '"+str(values['FACULT']) +"', "+" '"+str(values['KEYS_PLUS']) + "', " + " '"+ str(values['DIRECTION'])+"', "+str(res)+", "+str(disc2)+", "+str(disc3)+", "+" "+str(values['BALL_K'])+", "+" "+str(values['BALL_B']) +","+"'"+str(values['URL'])+"')"
+                sql = "INSERT INTO " + table_name + "(DESCR, PROFILE_NAME, ID, FACULTY, KEYS_PLUS, NAME, BALL_K, BALL_B, URL, ACTIVE) VALUES ( '" +str(values["DESCR"])+ "', '"+str(values["DESCR"])+"', '"+str(values["ID"])+"', '"+str(values["FACULT"])+"', '"+str(values["KEYS_PLUS"])+"', '"+str(values["DIRECTION"])+"', '"+str(values["BALL_K"]+"', '"+str(values["BALL_B"]+"', '"+str(values["URL"]+"', '"+str(values["ACTIVE"]+"')"
                 print(sql)
                 cursor.execute(sql)
                 connection.commit()
