@@ -14,12 +14,12 @@ def connect():
         return cnx
 
 def set_user(table_name,connection,ID_VK):
-    if search_field(table_name, connection, ID_VK , "ID_VK")==False:
+    if search_field(table_name, connection, ID_VK , "ID")==False:
         try:
             with connection.cursor() as cursor:
-                sql = "INSERT INTO " + table_name + " (ID_VK, LAST_NEWS) VALUES (%s, '2017-01-01 00:00:00')"
+                sql = "INSERT INTO " + table_name + " (ID, LAST_NEWS) VALUES (%s, '2017-01-01 00:00:00')"
                 print(sql)
-                str = cursor.execute(sql,(ID_VK))
+                cursor.execute(sql,(ID_VK))
                 connection.commit()
                 return True
         except:
@@ -63,6 +63,15 @@ def get_fields(connection,table_name,select_field,field,value):
             sql = "SELECT " + select_field + " FROM " + table_name + " WHERE " + field + " = %s"
             cursor.execute(sql,(value))
             return list(cursor.fetchone())
+
+def executeSQL(sql, connection):
+    with connection.cursor() as cursor:
+        res = cursor.execute(sql)
+        connection.commit()
+        if res!=0:
+            return list(cursor.fetchall())
+        else:
+            return 0
 
 #def get_field(connection, table_name, ID_VK, field):
 #    with connection.cursor() as cursor:

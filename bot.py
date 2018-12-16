@@ -2,6 +2,7 @@
 # -*- coding: utf-8 -*-
 # vim:fileencoding=utf-8
 import vk_api
+import random
 import time
 import json
 import sys
@@ -61,43 +62,23 @@ def search_direction_by_subjects(id):
         vk.method("messages.send", {"user_id": id,"message": "Заставил же ты меня потрудиться!😁", 'keyboard': key['main_menu']})
 
 def search_direction_by_sphere(id):
-    res = []
-    sphere1 = data.get_field(select_field = "SPHERE1",table_name = "USERS",connection= connection,value=id, field="id_vk")[0][0]
-    if sphere1 == 0:
-        vk.method("messages.send", {"user_id": id, "message": "Но... ведь... сферы не выбраны... Давай, исправляйся😊", "keyboard":key['sphere']})
-    else:
-        res = data.get_field(select_field = "DIRECTION, PROFILE_NAME, FACULT, DESCR, URL",table_name = "DIRECTIONS",connection= connection,value=sphere1, field="SPHERE")
-        sphere2 = data.get_field(select_field = "SPHERE2",table_name = "USERS",connection= connection,value=id, field="id_vk")[0][0]
-        if sphere2 != 0:
-            temp = data.get_field(select_field = "DIRECTION, PROFILE_NAME, FACULT, DESCR, URL",table_name = "DIRECTIONS",connection= connection,value=sphere2, field="SPHERE")
-            if temp != 0:
-                for item in temp:
-                    res.append(item)
-            sphere3 = data.get_field(select_field = "SPHERE3",table_name = "USERS",connection= connection,value=id, field="id_vk")[0][0]
-            if sphere3 != 0:
-                temp = data.get_field(select_field = "DIRECTION, PROFILE_NAME, FACULT, DESCR, URL",table_name = "DIRECTIONS",connection= connection,value=sphere3, field="SPHERE")
-                if temp != 0:
-                    for item in temp:
-                        res.append(item)
-        res = list(set(res))
+    sql = "SELECT ID_DIR FROM DIR_SPHERES WHERE ID_SPHERES IN (SELECT ID_SPHERE FROM USERS_SPHERE WHERE ID_USER = "+str(id)+") GROUP BY ID_DIR"
+    id_dirs = data.executeSQL(sql = sql, connection = connection)
+    for id_dir in id_dirs:
+        sql = "SELECT NAME, DESCR, FACULTY, URL FROM DIRECTIONS WHERE ID = "+str(id_dir[0])
+        res = data.executeSQL(sql = sql, connection = connection)
         response = ""
         vk.method("messages.send", {"user_id": id,"message":"Вот что я нашел🙃"})
         for item in res:
             if item[1]=='null':
-                if item[3]=='null':
-                    response = response + "Направление: " + '"' + item[0] + '"' + " на факультете " + item[2]+ "\n" +"Ссылка на направление: " + item[4]+"\n\n"
-                else:
-                    response = response + "Направление: " + '"' + item[0] + '"' + " на факультете " + item[2]+ "\n" +item[3] + "\n" +"Ссылка на направление: " + item[4]+"\n\n"
+                response = response + "Направление: " + '"' + item[0] + '"' + " на факультете " + item[2]+ "\n" +"Ссылка на направление: " + item[3]+"\n\n"
             else:
-                if item[3]=='null':
-                    response = response + "Направление: " + '"' + item[0] + ' (' + item[1] + ')' + '"' + " на факультете " + item[2]+ "\n" +"Ссылка на направление: " + item[4]+"\n\n"
-                else:
-                    response = response + "Направление: " + '"' + item[0] + ' (' + item[1] + ')' + '"' + " на факультете " + item[2]+ "\n" +item[3] + "\n" +"Ссылка на направление: " + item[4]+"\n\n"
+                response = response + "Направление: " + '"' + item[0] + ' (' + item[1] + ')' + '"' + " на факультете " + item[2]+ "\n" +"Ссылка на направление: " + item[3]+"\n\n"
             if(len(response)>3500):
                 vk.method("messages.send", {"user_id": id,"message": response})
                 response = ""
-        if(response!=""):
-            vk.method("messages.send", {"user_id": id,"message": response})
+    if(response!=""):
+        vk.method("messages.send", {"user_id": id,"message": response})
         vk.method("messages.send", {"user_id": id,"message": "Искал как в последний раз😂", 'keyboard': key['main_menu']})
 
 
@@ -107,7 +88,7 @@ def search_direction_by_sphere(id):
 
 
 def data_processing(id, pay, msg):
-    if data.search_field(table_name="USERS",connection=connection,value=id, field="ID_VK")==False:
+    if data.search_field(table_name="USERS",connection=connection,value=id, field="ID")==False:
         data.set_user(table_name="USERS", connection=connection,ID_VK=id)
     
     if pay=={"command":"start"} or pay == "admin":
@@ -133,28 +114,22 @@ def data_processing(id, pay, msg):
         vk.method("messages.send", {"user_id": id, "message": " А как подобрать напрваление?", "keyboard":key['direction_selection']})
     
     elif pay=="sphere":
-        data.set_field(connection = connection, table_name = "USERS", ID_VK = id, field = "SPHERE1", value = 0)
-        data.set_field(connection = connection, table_name = "USERS", ID_VK = id, field = "SPHERE2", value = 0)
-        data.set_field(connection = connection, table_name = "USERS", ID_VK = id, field = "SPHERE3", value = 0)
+        sql = "DELETE FROM USERS_SPHERES WHERE ID_USER = "+str(id)
+        data.executeSQL(sql = sql, connection = connection)
         vk.method("messages.send", {"user_id": id, "message": "Подскажи сферы, а то тут много😊", "keyboard":key['sphere']})
     
     elif pay=="Машиностроение" or pay=="Безопасность" or pay=="Энергетика" or pay=="IT-технологии" or pay=="Электроника" or pay=="Авиация" or pay=="Общество" or pay=="Экономика" or pay=="Химия" or pay=="Языки" or pay=="Физика":
-        sphere_id = data.get_field(table_name = "SPHERE", connection = connection, select_field = 'SPHERE', field = 'NAME_SPHERE', value = pay)[0][0]
-        sphere1 = data.get_field(table_name = "USERS", connection = connection, select_field = 'SPHERE1', field = 'ID_VK', value = id)[0][0]
-        if sphere1==0:
-            vk.method("messages.send", {"user_id": id, "message": "Добавил! Это было легко😉", "keyboard":key['sphere']})
-            data.set_field(connection = connection, table_name = 'USERS', ID_VK = id, field = 'SPHERE1', value = sphere_id)
-        else:
-            sphere2 = data.get_field(table_name = "USERS", connection = connection, select_field = 'SPHERE2', field = 'ID_VK', value = id)[0][0]
-            if sphere2 == 0:
-                vk.method("messages.send", {"user_id": id, "message": "Проще простого! Добавил!", "keyboard":key['sphere']})
-                data.set_field(connection = connection, table_name = 'USERS', ID_VK = id, field = 'SPHERE2', value = sphere_id)
-            else:
-                sphere3 = data.get_field(table_name = "USERS", connection = connection, select_field = 'SPHERE3', field = 'ID_VK', value = id)[0][0]
-                if sphere3 == 0:
-                    vk.method("messages.send", {"user_id": id, "message": "Изи добавил!", "keyboard":key['sphere']})
-                    data.set_field(connection = connection, table_name = 'USERS', ID_VK = id, field = 'SPHERE3', value = sphere_id)
-                    search_direction_by_sphere(id = id)
+        msg = ["Добавил! Это было легко😉", "Проще простого! Добавил!", "Изи добавил!"]
+        sql = "SELECT ID_SPHERE FROM DIR_SPHERES WHERE ID_USER = "+str(id)
+        size = data.executeSQL(sql = sql, connection = connection)
+        if len(size) < 3:
+            sql = "SELECT ID FROM SPHERES WHERE NAME = '"+str(pay)+"'"
+            idSph = data.executeSQL(sql = sql, connection = connection)
+            sql = "INSERT INTO USERS_SPHERES (ID_USER, ID_SPHERE) VALUES("+str(id)+", "+str(idSph[0][0])+")"
+            data.executeSQL(sql = sql, connection = connection)
+            vk.method("messages.send", {"user_id": id, "message": random.choice(msg), "keyboard":key['sphere']})
+            if len(size)+1>=3:
+                search_direction_by_sphere(id = id)
         
    
     elif pay=="name_dir":
