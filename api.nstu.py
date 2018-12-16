@@ -87,6 +87,22 @@ def set_sphere(values):
             cursor.execute(sql)
             connection.commit()
 
+def set_sub(values):
+    disk2 = values["DISK2"]
+    disk3 = values["DISK3"]
+    d2 = subjects[disk2]
+    d3 = subjects[disk3]
+    sql = "SELECT ID FROM SUBJECTS WHERE NAME = '"+str(d2)+"'"
+    r = executeSQL(sql)
+    sql = "INSERT INTO DIR_SUBJECTS (ID_DIR, ID_SUB) VALUES("+str(values["ID"])+", "+str(r[0][0])+""
+    executeSQL(sql)
+    sql = "SELECT ID FROM SUBJECTS WHERE NAME = '"+str(d3)+"'"
+    r = executeSQL(sql)
+    sql = "INSERT INTO DIR_SUBJECTS (ID_DIR, ID_SUB) VALUES("+str(values["ID"])+", "+str(r[0][0])+""
+    executeSQL(sql)
+
+
+
 
 def main():
     url = getter.get_nstu_url()
