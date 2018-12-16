@@ -88,8 +88,8 @@ def set_sphere(values):
             connection.commit()
 
 def set_sub(values):
-    disk2 = values["DISK2"]
-    disk3 = values["DISK3"]
+    disk2 = values["DISC2"]
+    disk3 = values["DISC3"]
     d2 = subjects[disk2]
     d3 = subjects[disk3]
     sql = "SELECT ID FROM SUBJECTS WHERE NAME = '"+str(d2)+"'"
