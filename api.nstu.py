@@ -62,7 +62,8 @@ def set_sphere(values):
     with connection.cursor() as cursor:
         sql = "INSERT INTO DIR_SPHERES (ID_DIR, ID_SPHERE) VALUES"
         for sphere in values["data"]:
-            sql = sql+"('"+str(values["ID"])+"', '"+str(sphere)+"'),"
+            if sphere[0]!=None:
+                sql = sql+"('"+str(values["ID"])+"', '"+str(sphere[0])+"'),"
         sql = sql[0:len(sql)-1]
         print(sql)
         #cursor.execute(sql)
