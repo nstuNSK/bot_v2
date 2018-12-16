@@ -123,15 +123,16 @@ def data_processing(id, pay, msg):
         msg = ["Добавил! Это было легко😉", "Проще простого! Добавил!", "Изи добавил!"]
         sql = "SELECT ID_SPHERE FROM USERS_SPHERES WHERE ID_USER = "+str(id)
         size = data.executeSQL(sql = sql, connection = connection)
-        print("i daje tut")
-        if len(size) < 3:
-            sql = "SELECT ID FROM SPHERES WHERE NAME = '"+str(pay)+"'"
-            idSph = data.executeSQL(sql = sql, connection = connection)
-            sql = "INSERT INTO USERS_SPHERES (ID_USER, ID_SPHERE) VALUES("+str(id)+", "+str(idSph[0][0])+")"
-            data.executeSQL(sql = sql, connection = connection)
-            vk.method("messages.send", {"user_id": id, "message": random.choice(msg), "keyboard":key['sphere']})
-            if len(size)+1>=3:
-                search_direction_by_sphere(id = id)
+        print(len(size))
+        if size!=0:
+            if len(size) < 3:
+                sql = "SELECT ID FROM SPHERES WHERE NAME = '"+str(pay)+"'"
+                idSph = data.executeSQL(sql = sql, connection = connection)
+                sql = "INSERT INTO USERS_SPHERES (ID_USER, ID_SPHERE) VALUES("+str(id)+", "+str(idSph[0][0])+")"
+                data.executeSQL(sql = sql, connection = connection)
+                vk.method("messages.send", {"user_id": id, "message": random.choice(msg), "keyboard":key['sphere']})
+                if len(size)+1>=3:
+                    search_direction_by_sphere(id = id)
         
    
     elif pay=="name_dir":
