@@ -112,7 +112,7 @@ def main():
     api = json.loads(text)
     i = 1
     for item in api:
-        set_sphere(item)
+        set_sub(item)
 
 if __name__== '__main__':
     main()
