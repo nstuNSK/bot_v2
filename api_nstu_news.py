@@ -46,17 +46,15 @@ def get_html(url):
 def get_json(text):
     return json.loads(text)
 
-def get_people(type):
-    if type == "schoolchild":
-        people = data.get_field(connection = connection, table_name = "USERS", select_field = "ID_VK", field = "SUB_S", value = True)
-    else:
-        people = data.get_field(connection = connection, table_name = "USERS", select_field = "ID_VK", field = "SUB_E", value = True)
+def get_people():
+    sql = "SELECT ID FROM USERS WHERE SUBSCRIBE = 1"
+    people = data.executeSQL(sql = sql, connection = connection)
     return people
 
 def create_msgs(news, vk, id):
     msg = ""
     msgs = []
-    date = data.get_field(connection = connection, table_name = "USERS", select_field = "LAST_NEWS", field = "ID_VK", value = id)[0][0]
+    date = data.get_field(connection = connection, table_name = "USERS", select_field = "LAST_NEWS", field = "ID", value = id)[0][0]
     date_last_news = news[0]["NEWS_DATE"][0:10]+" "+news[0]["NEWS_DATE"][11:len(news[0]["NEWS_DATE"])]
     for one_news in news:
         date_news = one_news["NEWS_DATE"][0:10]+" "+one_news["NEWS_DATE"][11:len(one_news["NEWS_DATE"])]
@@ -76,7 +74,7 @@ def create_msgs(news, vk, id):
 
 def send_news(news, vk, type):
     f = open("logs.txt", "a")
-    people = get_people(type)
+    people = get_people()
     f.write("starting send for " + str(type)+"\n")
     if people != 0:
         for id in people:
@@ -92,20 +90,6 @@ def send_news(news, vk, type):
                 vk.method("messages.send", {"user_id": id[0], "message": "Пока все😊"})
                 f.write("footer msg sended\n")
     f.close()
-    
-
-#def send_one_person(id, type):
-    #url = get_actual_url()
-    #html = get_html(url)
-    #text = html.text
-    #news = get_json(text)
-    #msgs = create_msgs(news, vk)
-    #print("Только одному!")
-    #print("Отправляю новости для: ",type, " на", id)
-    #vk.method("messages.send", {"user_id": id, "message": "Вот, принес тебе последние новости😊"})
-    #for msg in msgs:
-        #vk.method("messages.send", {"user_id": id, "message": msg})
-    #vk.method("messages.send", {"user_id": id, "message": "Пока все😊"})
 
 def main():
     i = 1
@@ -120,19 +104,11 @@ def main():
     if news != []:
         f.write("news object created"+"\n")
         send_news(news, vk, "schoolchild")
-        f.write("send to schoolchild finished"+"\n")
-        send_news(news, vk, "enrollee")
-        f.write("send to enrollee finished"+"\n"+"////////////\n \n")
+        f.write("sended!"+"\n")
     else:
          f.write("News are empty\n")
     f.write("end log\n \n")
     f.close()
-    '''for item in news:
-    print('Статья: ',item['TITLE'])
-    print('ID: ',item['ID'])
-    print('Ссылка: ',item['URL'])
-    print('Дата: ',item['NEWS_DATE'])
-    print('Коротко: ',item['SHORTTEXT'])'''
 
 if __name__ == "__main__":
     main()
