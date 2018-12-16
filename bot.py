@@ -119,9 +119,11 @@ def data_processing(id, pay, msg):
         vk.method("messages.send", {"user_id": id, "message": "Подскажи сферы, а то тут много😊", "keyboard":key['sphere']})
     
     elif pay=="Машиностроение" or pay=="Безопасность" or pay=="Энергетика" or pay=="IT-технологии" or pay=="Электроника" or pay=="Авиация" or pay=="Общество" or pay=="Экономика" or pay=="Химия" or pay=="Языки" or pay=="Физика":
+        print("tut")
         msg = ["Добавил! Это было легко😉", "Проще простого! Добавил!", "Изи добавил!"]
         sql = "SELECT ID_SPHERE FROM DIR_SPHERES WHERE ID_USER = "+str(id)
         size = data.executeSQL(sql = sql, connection = connection)
+        print("i daje tut")
         if len(size) < 3:
             sql = "SELECT ID FROM SPHERES WHERE NAME = '"+str(pay)+"'"
             idSph = data.executeSQL(sql = sql, connection = connection)
