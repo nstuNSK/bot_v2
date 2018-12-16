@@ -69,6 +69,7 @@ def executeSQL(sql):
 i = 1
 def set_spheres(values):
     for sphere in values["data"]:
+        global i
         sql = "SELECT * FROM SPHERES WHERE NAME = '"+str(sphere["SPHERE"])+"'"
         res = executeSQL(sql)
         if res == 0:
