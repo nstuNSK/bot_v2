@@ -123,7 +123,7 @@ def data_processing(id, pay, msg):
         msg = ["Добавил! Это было легко😉", "Проще простого! Добавил!", "Изи добавил!"]
         sql = "SELECT ID_SPHERE FROM USERS_SPHERES WHERE ID_USER = "+str(id)
         size = data.executeSQL(sql = sql, connection = connection)
-        print(len(size))
+        print(size)
         if size!=0:
             if len(size) < 3:
                 sql = "SELECT ID FROM SPHERES WHERE NAME = '"+str(pay)+"'"
