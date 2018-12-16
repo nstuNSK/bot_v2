@@ -62,25 +62,21 @@ def search_direction_by_subjects(id):
         vk.method("messages.send", {"user_id": id,"message": "Заставил же ты меня потрудиться!😁", 'keyboard': key['main_menu']})
 
 def search_direction_by_sphere(id):
-    sql = "SELECT ID_DIR FROM DIR_SPHERES WHERE ID_SPHERE IN (SELECT ID_SPHERE FROM USERS_SPHERES WHERE ID_USER = "+str(id)+") GROUP BY ID_DIR"
-    id_dirs = data.executeSQL(sql = sql, connection = connection)
+    sql = "SELECT NAME, DESCR, FACULTY, URL FROM DIRECTIONS WHERE ID IN (SELECT ID_DIR FROM DIR_SPHERES WHERE ID_SPHERE IN (SELECT ID_SPHERE FROM USERS_SPHERES WHERE ID_USER = "+str(id)+")) GROUP BY ID_DIR"
+    res = data.executeSQL(sql = sql, connection = connection)
     print("tut")
     vk.method("messages.send", {"user_id": id,"message":"Вот что я нашел🙃"})
-    for id_dir in id_dirs:
-        print(id_dir[0])
-        sql = "SELECT NAME, DESCR, FACULTY, URL FROM DIRECTIONS WHERE ID = "+str(id_dir[0])
-        res = data.executeSQL(sql = sql, connection = connection)
-        response = ""
-        for item in res:
-            if item[1]=='null':
-                response = response + "Направление: " + '"' + item[0] + '"' + " на факультете " + item[2]+ "\n" +"Ссылка на направление: " + item[3]+"\n\n"
-            else:
-                response = response + "Направление: " + '"' + item[0] + ' (' + item[1] + ')' + '"' + " на факультете " + item[2]+ "\n" +"Ссылка на направление: " + item[3]+"\n\n"
-            if(len(response)>3500):
-                vk.method("messages.send", {"user_id": id,"message": response})
-                response = ""
-        if(response!=""):
+    response = ""
+    for item in res:
+        if item[1]=='null':
+            response = response + "Направление: " + '"' + item[0] + '"' + " на факультете " + item[2]+ "\n" +"Ссылка на направление: " + item[3]+"\n\n"
+        else:
+            response = response + "Направление: " + '"' + item[0] + ' (' + item[1] + ')' + '"' + " на факультете " + item[2]+ "\n" +"Ссылка на направление: " + item[3]+"\n\n"
+        if(len(response)>3500):
             vk.method("messages.send", {"user_id": id,"message": response})
+            response = ""
+    if(response!=""):
+        vk.method("messages.send", {"user_id": id,"message": response})
     vk.method("messages.send", {"user_id": id,"message": "Искал как в последний раз😂", 'keyboard': key['main_menu']})
 
 
