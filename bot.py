@@ -135,6 +135,7 @@ def data_processing(id, pay, msg):
                 add_sphere(id=id,connection=connection, pay = pay)
                 vk.method("messages.send", {"user_id": id, "message": random.choice(msg), "keyboard":key['sphere']})
                 if len(size)+1>=3:
+                    print(">=3")
                     search_direction_by_sphere(id = id)
         else:
             add_sphere(id=id,connection=connection, pay = pay)
