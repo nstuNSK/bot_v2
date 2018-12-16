@@ -44,7 +44,7 @@ def set_line(table_name, values):
     if values["PROFILE_NAME"]==None:
         values["PROFILE_NAME"] = "null"
     with connection.cursor() as cursor:
-            if search_field("DIRECTIONS", "ID_DIR", values["ID"]) == False:
+            if search_field("DIRECTIONS", "ID", values["ID"]) == False:
                 sql = "INSERT INTO " + table_name + "(DESCR, PROFILE_NAME, ID, FACULTY, KEYS_PLUS, NAME, BALL_K, BALL_B, URL, ACTIVE) VALUES ( '" +str(values["DESCR"])+ "', '"+str(values["DESCR"])+"', '"+str(values["ID"])+"', '"+str(values["FACULT"])+"', '"+str(values["KEYS_PLUS"])+"', '"+str(values["DIRECTION"])+"', '"+str(values["BALL_K"])+"', '"+str(values["BALL_B"])+"', '"+str(values["URL"])+"', '"+str(values["ACTIVE"])+"')"
                 print(sql)
                 cursor.execute(sql)
