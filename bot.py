@@ -17,14 +17,7 @@ def auth():
     vk = vk_api.VkApi(token=token)
     vk._auth_token()
     return vk
-
-def subscribe(type, id):
-    if data.get_field(connection=connection, table_name="USERS",select_field = type, field="ID_VK", value=id)[0][0]==False:
-        data.set_field(connection = connection, table_name = "USERS", ID_VK = id, field = type, value = "1")
-        vk.method("messages.send", {"user_id": id, "message": "Теперь я буду отправлять тебе новости! Люблю это😍", 'keyboard': key['main_menu']})
-    else:
-        data.set_field(connection = connection, table_name = "USERS", ID_VK = id, field = type, value = "0")
-        vk.method("messages.send", {"user_id": id, "message": "Не хочешь, как хочешь...\nНо, если передумаешь, я всегда готов💪🏻", 'keyboard': key['main_menu']})
+    
 
 def search_direction_by_subjects(id):
     print("yeah!")
@@ -108,13 +101,12 @@ def data_processing(id, pay, msg):
         vk.method("messages.send", {"user_id": id, "message": "Сделал!", "keyboard":key['main_menu']})
 
     elif pay=="subscribe":
-        vk.method("messages.send", {"user_id": id, "message": "Какие новости нас интересуют?", "keyboard":key['subscribe']})
-    
-    elif pay=="enrollee":
-        subscribe(type = 'SUB_E', id = id)
-    
-    elif pay=="schoolchild":
-        subscribe(type = 'SUB_S', id = id)
+        if data.get_field(connection=connection, table_name="USERS",select_field = "SUBSCRIBE", field="ID", value=id)[0][0]==False:
+            data.set_field(connection = connection, table_name = "USERS", ID_VK = id, field = "SUBSCRIBE", value = "1")
+        vk.method("messages.send", {"user_id": id, "message": "Теперь я буду отправлять тебе новости! Люблю это😍", 'keyboard': key['main_menu']})
+    else:
+        data.set_field(connection = connection, table_name = "USERS", ID_VK = id, field = "SUBCRIBE", value = "0")
+        vk.method("messages.send", {"user_id": id, "message": "Не хочешь, как хочешь...\nНо, если передумаешь, я всегда готов💪🏻", 'keyboard': key['main_menu']})
     
     elif pay=="direction_selection":
         vk.method("messages.send", {"user_id": id, "message": " А как подобрать напрваление?", "keyboard":key['direction_selection']})
