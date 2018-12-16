@@ -15,12 +15,14 @@ subjects = {'Математика': "math",
 'Химия': "chemistry",
 'Обществознание': "social_science",
 'Иностр. яз.': "foreign_language"}
+
 def get_field(table_name,field1, field2, value):
     with connection.cursor() as cursor:
         sql = "SELECT " + field1 + " FROM " + table_name + " WHERE " + field2 + " = %s"
         print(sql)
         cursor.execute(sql,(value))
         return list(cursor.fetchone())[0]
+
 def search_field(table_name, field, value):
     if value != None:
         with connection.cursor() as cursor:
@@ -77,6 +79,22 @@ def set_spheres(values):
             i = i+1
             executeSQL(sql)
 
+def set_subject(values):
+    global i
+    sql = "SELECT * FROM SUBJECTS WHERE NAME = '"+str(subjects[values["DISC1"]])+"'"
+    r = executeSQL(sql)
+    if r==0:
+        sql = "INSERT INTO SUBJECTS (ID, NAME) VALUES("+str(i)+", '"+str(subjects[values["DISC1"]])+"')"
+        i = i+1
+        executeSQL(sql)
+    sql = "SELECT * FROM SUBJECTS WHERE NAME = '"+str(subjects[values["DISC2"]])+"'"
+    r = executeSQL(sql)
+    if r == 0:
+        sql = "INSERT INTO SUBJECTS (ID, NAME) VALUES("+str(i)+", '"+str(subjects[values["DISC2"]])+"')"
+        i = i+1
+        executeSQL(sql)
+
+
 
 def set_sphere(values):
     with connection.cursor() as cursor:
@@ -100,8 +118,7 @@ def main():
     api = json.loads(text)
     i = 1
     for item in api:
-        #set_dir("DIRECTIONS",item)
-        set_spheres(item)
+        set_subject(item)
 
 if __name__== '__main__':
     main()
