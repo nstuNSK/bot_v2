@@ -121,7 +121,7 @@ def data_processing(id, pay, msg):
     elif pay=="Машиностроение" or pay=="Безопасность" or pay=="Энергетика" or pay=="IT-технологии" or pay=="Электроника" or pay=="Авиация" or pay=="Общество" or pay=="Экономика" or pay=="Химия" or pay=="Языки" or pay=="Физика":
         print("tut")
         msg = ["Добавил! Это было легко😉", "Проще простого! Добавил!", "Изи добавил!"]
-        sql = "SELECT ID_SPHERE FROM DIR_SPHERES WHERE ID_USER = "+str(id)
+        sql = "SELECT ID_SPHERE FROM USERS_SPHERES WHERE ID_USER = "+str(id)
         size = data.executeSQL(sql = sql, connection = connection)
         print("i daje tut")
         if len(size) < 3:
