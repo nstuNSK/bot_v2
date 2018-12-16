@@ -17,34 +17,17 @@ def auth():
     vk = vk_api.VkApi(token=token)
     vk._auth_token()
     return vk
-    
 
-def search_direction_by_subjects(id):
-    sql = "SELECT NAME, DESCR, FACULTY, URL FROM DIRECTIONS WHERE ID IN (SELECT ID_DIR FROM DIR_SUBJECTS WHERE ID_SUB IN (SELECT ID_SUB FROM USERS_SUBJECTS WHERE ID_USER = "+str(id)+")) GROUP BY ID"
+def search_direction(id, type):
+    msgstart = ["Вот что я нашел🙃", "Понеслась!", "Уже нашел!", "Так-так-так, что тут у нас?"]
+    msgend = ["Искал как в последний раз😂", "Заставил же ты меня потрудиться!😁", "Фух... устал..."]
+    if type == "SPHERE":
+        sql = "SELECT NAME, DESCR, FACULTY, URL FROM DIRECTIONS WHERE ID IN (SELECT ID_DIR FROM DIR_SPHERES WHERE ID_SPHERE IN (SELECT ID_SPHERE FROM USERS_SPHERES WHERE ID_USER = "+str(id)+")) GROUP BY ID"
+    elif type == "SUBJECTS":
+        sql = "SELECT NAME, DESCR, FACULTY, URL FROM DIRECTIONS WHERE ID IN (SELECT ID_DIR FROM DIR_SUBJECTS WHERE ID_SUB IN (SELECT ID_SUB FROM USERS_SUBJECTS WHERE ID_USER = "+str(id)+")) GROUP BY ID"
     res = data.executeSQL(sql = sql, connection = connection)
-    if res != 0:
-        vk.method("messages.send", {"user_id": id, "message": "Понеслась!"})
-        response = ""
-        for item in res:
-            if item[1]=='null':
-                response = response + "Направление: " + '"' + item[0] + '"' + " на факультете " + item[2]+ "\n" +"Ссылка на направление: " + item[3]+"\n\n"
-            else:
-                response = response + "Направление: " + '"' + item[0] + ' (' + item[1] + ')' + '"' + " на факультете " + item[2]+ "\n" +"Ссылка на направление: " + item[3]+"\n\n"
-            if(len(response)>3500):
-                vk.method("messages.send", {"user_id": id,"message": response})
-                response = ""
-        if(response!=""):
-            vk.method("messages.send", {"user_id": id,"message": response})
-        vk.method("messages.send", {"user_id": id,"message": "Заставил же ты меня потрудиться!😁", 'keyboard': get_main_keyboard(id =id, connection = connection)})
-    else:
-        vk.method("messages.send", {"user_id": id,"message":"А кто-то предметы не добавил:)", 'keyboard': key['subjects']})
-
-def search_direction_by_sphere(id):
-    sql = "SELECT NAME, DESCR, FACULTY, URL FROM DIRECTIONS WHERE ID IN (SELECT ID_DIR FROM DIR_SPHERES WHERE ID_SPHERE IN (SELECT ID_SPHERE FROM USERS_SPHERES WHERE ID_USER = "+str(id)+")) GROUP BY ID"
-    res = data.executeSQL(sql = sql, connection = connection)
-    print("tut")
     if res!=0:
-        vk.method("messages.send", {"user_id": id,"message":"Вот что я нашел🙃"})
+        vk.method("messages.send", {"user_id": id,"message":random.choice(msgstart)})
         response = ""
         for item in res:
             if item[1]=='null':
@@ -56,9 +39,12 @@ def search_direction_by_sphere(id):
                 response = ""
         if(response!=""):
             vk.method("messages.send", {"user_id": id,"message": response})
-        vk.method("messages.send", {"user_id": id,"message": "Искал как в последний раз😂", 'keyboard': get_main_keyboard(id =id, connection = connection)})
+        vk.method("messages.send", {"user_id": id,"message": random.choice(msgend), 'keyboard': get_main_keyboard(id =id, connection = connection)})
     else:
-        vk.method("messages.send", {"user_id": id,"message":"А сферы я за тебя добавлять буду?", 'keyboard': key['sphere']})
+        if type == "SPHERE":
+            vk.method("messages.send", {"user_id": id,"message":"Но... ты... же... ничего не добавил...", 'keyboard': key['sphere']})
+        elif type == "SUBJECTS":
+            vk.method("messages.send", {"user_id": id,"message":"Но... ты... же... ничего не добавил...", 'keyboard': key['subjects']})
 
 def add_sub(id, connection, sub):
     sql = "SELECT ID FROM SUBJECTS WHERE NAME = '"+str(sub)+"'"
@@ -124,7 +110,7 @@ def data_processing(id, pay, msg):
                 add_sphere(id=id,connection=connection, pay = pay)
                 vk.method("messages.send", {"user_id": id, "message": random.choice(msg), "keyboard":key['sphere']})
                 if len(size)+1>=3:
-                    search_direction_by_sphere(id = id)
+                    search_direction(id = id, type = "SPHERE")
         else:
             add_sphere(id=id,connection=connection, pay = pay)
             vk.method("messages.send", {"user_id": id, "message": random.choice(msg), "keyboard":key['sphere']})
@@ -144,15 +130,15 @@ def data_processing(id, pay, msg):
                 add_sub(id = id, connection = connection, sub = pay)
                 vk.method("messages.send", {"user_id": id, "message": random.choice(msg), "keyboard":key['subjects']})
                 if(len(idSub)+1>=2):
-                    search_direction_by_subjects(id = id)
+                    search_direction(id = id, type = "SUBJECTS")
         else:
             add_sub(id = id, connection = connection, sub = pay)
             vk.method("messages.send", {"user_id": id, "message": random.choice(msg), "keyboard":key['subjects']})
     
     elif pay == "search_by_sphere":
-        search_direction_by_sphere(id = id)
+        search_direction(id = id, type = "SPHERE")
     elif pay == "search_by_subjects":
-        search_direction_by_subjects(id = id)
+        search_direction(id = id, type = "SUBJECTS")
     #elif pay == "name_dir":
         #vk.method("messages.send", {"user_id": id, "message": "Меня пока что этому не научили😞\nНо совсем скоро научат, обещаю!", "keyboard": key['main_menu']})
     elif pay == "lists":
