@@ -79,9 +79,9 @@ def search_direction_by_sphere(id):
             if(len(response)>3500):
                 vk.method("messages.send", {"user_id": id,"message": response})
                 response = ""
-    if(response!=""):
-        vk.method("messages.send", {"user_id": id,"message": response})
-        vk.method("messages.send", {"user_id": id,"message": "Искал как в последний раз😂", 'keyboard': key['main_menu']})
+        if(response!=""):
+            vk.method("messages.send", {"user_id": id,"message": response})
+    vk.method("messages.send", {"user_id": id,"message": "Искал как в последний раз😂", 'keyboard': key['main_menu']})
 
 
 def add_sphere(id, connection, pay):
