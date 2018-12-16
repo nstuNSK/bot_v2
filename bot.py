@@ -64,7 +64,9 @@ def search_direction_by_subjects(id):
 def search_direction_by_sphere(id):
     sql = "SELECT ID_DIR FROM DIR_SPHERES WHERE ID_SPHERES IN (SELECT ID_SPHERE FROM USERS_SPHERE WHERE ID_USER = "+str(id)+") GROUP BY ID_DIR"
     id_dirs = data.executeSQL(sql = sql, connection = connection)
+    print("tut")
     for id_dir in id_dirs:
+        print(id_dir[0])
         sql = "SELECT NAME, DESCR, FACULTY, URL FROM DIRECTIONS WHERE ID = "+str(id_dir[0])
         res = data.executeSQL(sql = sql, connection = connection)
         response = ""
@@ -125,17 +127,14 @@ def data_processing(id, pay, msg):
         vk.method("messages.send", {"user_id": id, "message": "Подскажи сферы, а то тут много😊", "keyboard":key['sphere']})
     
     elif pay=="Машиностроение" or pay=="Безопасность" or pay=="Энергетика" or pay=="IT-технологии" or pay=="Электроника" or pay=="Авиация" or pay=="Общество" or pay=="Экономика" or pay=="Химия" or pay=="Языки" or pay=="Физика":
-        print("tut")
         msg = ["Добавил! Это было легко😉", "Проще простого! Добавил!", "Изи добавил!"]
         sql = "SELECT ID_SPHERE FROM USERS_SPHERES WHERE ID_USER = "+str(id)
         size = data.executeSQL(sql = sql, connection = connection)
         if size!=0:
-            print(len(size))
             if len(size) < 3:
                 add_sphere(id=id,connection=connection, pay = pay)
                 vk.method("messages.send", {"user_id": id, "message": random.choice(msg), "keyboard":key['sphere']})
                 if len(size)+1>=3:
-                    print(">=3")
                     search_direction_by_sphere(id = id)
         else:
             add_sphere(id=id,connection=connection, pay = pay)
