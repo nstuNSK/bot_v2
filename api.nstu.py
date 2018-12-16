@@ -61,13 +61,15 @@ def set_dir(table_name, values):
 def set_sphere(values):
     with connection.cursor() as cursor:
         sql = "INSERT INTO DIR_SPHERES (ID_DIR, ID_SPHERE) VALUES"
+        size = len(sql)
         for sphere in values["data"]:
             if sphere["SPHERE"]!=None:
                 sql = sql+"('"+str(values["ID"])+"', '"+str(sphere["SPHERE"])+"'),"
-        sql = sql[0:len(sql)-1]
-        print(sql)
-        #cursor.execute(sql)
-        #connection.commit()
+        if size < len(sql):
+            sql = sql[0:len(sql)-1]
+            print(sql)
+            cursor.execute(sql)
+            connection.commit()
 
 
 def main():
