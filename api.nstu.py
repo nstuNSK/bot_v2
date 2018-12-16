@@ -32,7 +32,9 @@ def search_field(table_name, field, value):
                 return True
     else:
         return True
-def set_line(table_name, values):
+
+
+def set_dir(table_name, values):
     print(values)
     res = 0
     if values["BALL_K"] == None:
@@ -46,15 +48,26 @@ def set_line(table_name, values):
     with connection.cursor() as cursor:
             if search_field("DIRECTIONS", "ID", values["ID"]) == False:
                 sql = "INSERT INTO " + table_name + "(DESCR, PROFILE_NAME, ID, FACULTY, KEYS_PLUS, NAME, BALL_K, BALL_B, URL) VALUES ( '" +str(values["DESCR"])+ "', '"+str(values["DESCR"])+"', '"+str(values["ID"])+"', '"+str(values["FACULT"])+"', '"+str(values["KEYS_PLUS"])+"', '"+str(values["DIRECTION"])+"', '"+str(values["BALL_K"])+"', '"+str(values["BALL_B"])+"', '"+str(values["URL"])+"')"
-                print(sql)
                 cursor.execute(sql)
                 connection.commit()
+            
             '''else:
                 val = get_field("DIRECTIONS","SPHERE","ID_DIR",values["ID"])
                 val = val*100+values["SPHEPE"]
                 sql = "UPDATE "+table_name+" SET SPHERE = '"+str(val)+"' WHERE ID_DIR = '" + str(values["ID"]) + "'"
                 cursor.execute(sql)
                 connection.commit()'''
+
+def set_sphere(values):
+    with connection.cursor() as cursor:
+        sql = "INSERT INTO DIR_SPHERES (ID_DIR, ID_SPHERE) VALUES"
+        for sphere in values["data"]:
+            sql = sql+"('"+str(values["ID"])+"', '"+str(sphere)+"'),"
+        sql = sql[0:len(sql)-1]
+        print(sql)
+        #cursor.execute(sql)
+        #connection.commit()
+
 
 def main():
     url = getter.get_nstu_url()
@@ -64,7 +77,8 @@ def main():
     api = json.loads(text)
     i = 1
     for item in api:
-            set_line("DIRECTIONS",item)
+        #set_dir("DIRECTIONS",item)
+        set_sphere(item)
 
 if __name__== '__main__':
     main()
