@@ -87,7 +87,6 @@ def add_sphere(id, connection, pay):
     idSph = data.executeSQL(sql = sql, connection = connection)
     sql = "INSERT INTO USERS_SPHERES (ID_USER, ID_SPHERE) VALUES("+str(id)+", "+str(idSph[0][0])+")"
     data.executeSQL(sql = sql, connection = connection)
-    vk.method("messages.send", {"user_id": id, "message": random.choice(msg), "keyboard":key['sphere']})
 
 #WAIT_FILLING_POINTS = "-3"
 #WAIT_FILLING = "-2"
@@ -134,10 +133,12 @@ def data_processing(id, pay, msg):
             print(len(size))
             if len(size) < 3:
                 add_sphere(id=id,connection=connection, pay = pay)
+                vk.method("messages.send", {"user_id": id, "message": random.choice(msg), "keyboard":key['sphere']})
                 if len(size)+1>=3:
                     search_direction_by_sphere(id = id)
         else:
             add_sphere(id=id,connection=connection, pay = pay)
+            vk.method("messages.send", {"user_id": id, "message": random.choice(msg), "keyboard":key['sphere']})
         
    
     elif pay=="name_dir":
