@@ -65,20 +65,22 @@ def search_direction_by_sphere(id):
     sql = "SELECT NAME, DESCR, FACULTY, URL FROM DIRECTIONS WHERE ID IN (SELECT ID_DIR FROM DIR_SPHERES WHERE ID_SPHERE IN (SELECT ID_SPHERE FROM USERS_SPHERES WHERE ID_USER = "+str(id)+")) GROUP BY ID"
     res = data.executeSQL(sql = sql, connection = connection)
     print("tut")
-    vk.method("messages.send", {"user_id": id,"message":"Вот что я нашел🙃"})
-    response = ""
-    for item in res:
-        if item[1]=='null':
-            response = response + "Направление: " + '"' + item[0] + '"' + " на факультете " + item[2]+ "\n" +"Ссылка на направление: " + item[3]+"\n\n"
-        else:
-            response = response + "Направление: " + '"' + item[0] + ' (' + item[1] + ')' + '"' + " на факультете " + item[2]+ "\n" +"Ссылка на направление: " + item[3]+"\n\n"
-        if(len(response)>3500):
+    if res!=0:
+        vk.method("messages.send", {"user_id": id,"message":"Вот что я нашел🙃"})
+        response = ""
+        for item in res:
+            if item[1]=='null':
+                response = response + "Направление: " + '"' + item[0] + '"' + " на факультете " + item[2]+ "\n" +"Ссылка на направление: " + item[3]+"\n\n"
+            else:
+                response = response + "Направление: " + '"' + item[0] + ' (' + item[1] + ')' + '"' + " на факультете " + item[2]+ "\n" +"Ссылка на направление: " + item[3]+"\n\n"
+            if(len(response)>3500):
+                vk.method("messages.send", {"user_id": id,"message": response})
+                response = ""
+        if(response!=""):
             vk.method("messages.send", {"user_id": id,"message": response})
-            response = ""
-    if(response!=""):
-        vk.method("messages.send", {"user_id": id,"message": response})
-    vk.method("messages.send", {"user_id": id,"message": "Искал как в последний раз😂", 'keyboard': key['main_menu']})
-
+        vk.method("messages.send", {"user_id": id,"message": "Искал как в последний раз😂", 'keyboard': key['main_menu']})
+    else:
+        vk.method("messages.send", {"user_id": id,"message":"А сферы я за тебя добавлять буду?", 'keyboard': key['sphere']}})
 
 def add_sphere(id, connection, pay):
     sql = "SELECT ID FROM SPHERES WHERE NAME = '"+str(pay)+"'"
