@@ -58,6 +58,24 @@ def set_dir(table_name, values):
                 cursor.execute(sql)
                 connection.commit()'''
 
+def executeSQL(sql):
+    with connection.cursor() as cursor:
+        res = cursor.execute(sql)
+        connection.commit()
+        if res!=0:
+            return list(cursor.fetchall())
+        else:
+            return 0
+i = 1
+def set_spheres(values):
+    for sphere in values["data"]:
+        sql = "SELECT * FROM SPHERES WHERE NAME = '"+str(sphere["SPHERE"])+"'"
+        res = executeSQL(sql)
+        if res == 0:
+            sql = "INSERT INTO SPHERE (ID, NAME) VALUES("+str(i)+", '"+str(sphere["SPHERE"])+"')"
+            executeSQL(sql)
+
+
 def set_sphere(values):
     with connection.cursor() as cursor:
         sql = "INSERT INTO DIR_SPHERES (ID_DIR, ID_SPHERE) VALUES"
@@ -81,7 +99,7 @@ def main():
     i = 1
     for item in api:
         #set_dir("DIRECTIONS",item)
-        set_sphere(item)
+        set_spheres(item)
 
 if __name__== '__main__':
     main()
