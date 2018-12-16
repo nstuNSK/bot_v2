@@ -103,7 +103,7 @@ def data_processing(id, pay, msg):
     elif pay=="subscribe":
         if data.get_field(connection=connection, table_name="USERS",select_field = "SUBSCRIBE", field="ID", value=id)[0][0]==False:
             print("tut")
-            data.set_field(connection = connection, table_name = "USERS", ID_VK = id, field = "SUBSCRIBE", value = "1")
+            data.set_field(connection = connection, table_name = "USERS", ID_VK = id, field = "SUBSCRIBE", value = 1)
             vk.method("messages.send", {"user_id": id, "message": "Теперь я буду отправлять тебе новости! Люблю это😍", 'keyboard': key['main_menu']})
         else:
             print("ya ya")
