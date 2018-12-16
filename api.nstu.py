@@ -68,33 +68,7 @@ def executeSQL(sql):
             return list(cursor.fetchall())
         else:
             return 0
-i = 1
-def set_spheres(values):
-    for sphere in values["data"]:
-        global i
-        sql = "SELECT * FROM SPHERES WHERE NAME = '"+str(sphere["SPHERE"])+"'"
-        res = executeSQL(sql)
-        if res == 0:
-            sql = "INSERT INTO SPHERES (ID, NAME) VALUES("+str(i)+", '"+str(sphere["SPHERE"])+"')"
-            i = i+1
-            executeSQL(sql)
 
-def set_subject(values):
-    global i
-    if values["DISC2"]!=None:
-        sql = "SELECT * FROM SUBJECTS WHERE NAME = '"+str(subjects[values["DISC2"]])+"'"
-        r = executeSQL(sql)
-        if r==0:
-            sql = "INSERT INTO SUBJECTS (ID, NAME) VALUES("+str(i)+", '"+str(subjects[values["DISC2"]])+"')"
-            i = i+1
-            executeSQL(sql)
-    if values["DISC3"]!=None:
-        sql = "SELECT * FROM SUBJECTS WHERE NAME = '"+str(subjects[values["DISC3"]])+"'"
-        r = executeSQL(sql)
-        if r == 0:
-            sql = "INSERT INTO SUBJECTS (ID, NAME) VALUES("+str(i)+", '"+str(subjects[values["DISC3"]])+"')"
-            i = i+1
-            executeSQL(sql)
 
 
 
@@ -104,7 +78,9 @@ def set_sphere(values):
         size = len(sql)
         for sphere in values["data"]:
             if sphere["SPHERE"]!=None:
-                sql = sql+"('"+str(values["ID"])+"', '"+str(sphere["SPHERE"])+"'),"
+                sql = "SELECT * FROM SPHERES WHERE NAME = '"+str(sphere["SPHERE"])+"'"
+                sph = executeSQL(sql)
+                sql = sql+"('"+str(values["ID"])+"', '"+str(sph[0][0])+"'),"
         if size < len(sql):
             sql = sql[0:len(sql)-1]
             print(sql)
@@ -120,7 +96,7 @@ def main():
     api = json.loads(text)
     i = 1
     for item in api:
-        set_subject(item)
+        set_sphere(item)
 
 if __name__== '__main__':
     main()
