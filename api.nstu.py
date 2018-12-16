@@ -81,18 +81,20 @@ def set_spheres(values):
 
 def set_subject(values):
     global i
-    sql = "SELECT * FROM SUBJECTS WHERE NAME = '"+str(subjects[values["DISC1"]])+"'"
-    r = executeSQL(sql)
-    if r==0:
-        sql = "INSERT INTO SUBJECTS (ID, NAME) VALUES("+str(i)+", '"+str(subjects[values["DISC1"]])+"')"
-        i = i+1
-        executeSQL(sql)
-    sql = "SELECT * FROM SUBJECTS WHERE NAME = '"+str(subjects[values["DISC2"]])+"'"
-    r = executeSQL(sql)
-    if r == 0:
-        sql = "INSERT INTO SUBJECTS (ID, NAME) VALUES("+str(i)+", '"+str(subjects[values["DISC2"]])+"')"
-        i = i+1
-        executeSQL(sql)
+    if values["DISC2"]!=None:
+        sql = "SELECT * FROM SUBJECTS WHERE NAME = '"+str(subjects[values["DISC2"]])+"'"
+        r = executeSQL(sql)
+        if r==0:
+            sql = "INSERT INTO SUBJECTS (ID, NAME) VALUES("+str(i)+", '"+str(subjects[values["DISC2"]])+"')"
+            i = i+1
+            executeSQL(sql)
+    if values["DISC3"]!=None:
+        sql = "SELECT * FROM SUBJECTS WHERE NAME = '"+str(subjects[values["DISC3"]])+"'"
+        r = executeSQL(sql)
+        if r == 0:
+            sql = "INSERT INTO SUBJECTS (ID, NAME) VALUES("+str(i)+", '"+str(subjects[values["DISC3"]])+"')"
+            i = i+1
+            executeSQL(sql)
 
 
 
