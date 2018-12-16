@@ -62,7 +62,7 @@ def search_direction_by_subjects(id):
         vk.method("messages.send", {"user_id": id,"message": "Заставил же ты меня потрудиться!😁", 'keyboard': key['main_menu']})
 
 def search_direction_by_sphere(id):
-    sql = "SELECT NAME, DESCR, FACULTY, URL FROM DIRECTIONS WHERE ID IN (SELECT ID_DIR FROM DIR_SPHERES WHERE ID_SPHERE IN (SELECT ID_SPHERE FROM USERS_SPHERES WHERE ID_USER = "+str(id)+")) GROUP BY ID_DIR"
+    sql = "SELECT NAME, DESCR, FACULTY, URL FROM DIRECTIONS WHERE ID IN (SELECT ID_DIR FROM DIR_SPHERES WHERE ID_SPHERE IN (SELECT ID_SPHERE FROM USERS_SPHERES WHERE ID_USER = "+str(id)+")) GROUP BY ID"
     res = data.executeSQL(sql = sql, connection = connection)
     print("tut")
     vk.method("messages.send", {"user_id": id,"message":"Вот что я нашел🙃"})
