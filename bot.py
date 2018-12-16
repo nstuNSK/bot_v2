@@ -82,7 +82,7 @@ def search_direction_by_sphere(id):
         vk.method("messages.send", {"user_id": id,"message": "Искал как в последний раз😂", 'keyboard': key['main_menu']})
 
 
-def add_sphere(id, connection):
+def add_sphere(id, connection, pay):
     sql = "SELECT ID FROM SPHERES WHERE NAME = '"+str(pay)+"'"
     idSph = data.executeSQL(sql = sql, connection = connection)
     sql = "INSERT INTO USERS_SPHERES (ID_USER, ID_SPHERE) VALUES("+str(id)+", "+str(idSph[0][0])+")"
@@ -133,11 +133,11 @@ def data_processing(id, pay, msg):
         if size!=0:
             print(len(size))
             if len(size) < 3:
-                add_sphere(id=id,connection=connection)
+                add_sphere(id=id,connection=connection, pay = pay)
                 if len(size)+1>=3:
                     search_direction_by_sphere(id = id)
         else:
-            add_sphere(id=id,connection=connection)
+            add_sphere(id=id,connection=connection, pay = pay)
         
    
     elif pay=="name_dir":
