@@ -78,9 +78,9 @@ def set_sphere(values):
         size = len(sql)
         for sphere in values["data"]:
             if sphere["SPHERE"]!=None:
-                sql = "SELECT * FROM SPHERES WHERE NAME = '"+str(sphere["SPHERE"])+"'"
-                sph = executeSQL(sql)
-                sql = sql+"('"+str(values["ID"])+"', '"+str(sph[0][0])+"'),"
+                sql2 = "SELECT * FROM SPHERES WHERE NAME = '"+str(sphere["SPHERE"])+"'"
+                sph = executeSQL(sql2)
+                sql = sql+"("+str(values["ID"])+", '"+str(sph[0][0])+"),"
         if size < len(sql):
             sql = sql[0:len(sql)-1]
             print(sql)
