@@ -9,7 +9,7 @@ def connect():
             user=user,
 			password = password,
             host = 'localhost',
-            db='Users'
+            db='DATA'
         )
         return cnx
 
