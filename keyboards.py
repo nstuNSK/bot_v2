@@ -28,15 +28,25 @@ def get_keyboards():
     keyboard_start = convertToString(keyboard_start)
 
 
-    keyboard_main_menu = {
+    keyboard_main_menu_off = {
         "one_time": True,
         "buttons":[
-            [get_button(label="Подписаться/отписаться",color="default",payload="subscribe")],
+            [get_button(label="Подписаться на новости",color="default",payload="subscribe")],
             [get_button(label="Подбор направления",color="default",payload="direction_selection")],
             [get_button(label="Конкурсные списки",color="default",payload="lists")]
         ]
     }
-    keyboard_main_menu = convertToString(keyboard_main_menu)
+    keyboard_main_menu_off = convertToString(keyboard_main_menu_off)
+
+    keyboard_main_menu_on = {
+        "one_time": True,
+        "buttons":[
+            [get_button(label="Отписаться от новостей",color="default",payload="subscribe")],
+            [get_button(label="Подбор направления",color="default",payload="direction_selection")],
+            [get_button(label="Конкурсные списки",color="default",payload="lists")]
+        ]
+    }
+    keyboard_main_menu_on = convertToString(keyboard_main_menu_on)
 
 
     keyboard_subscribe={
@@ -139,7 +149,8 @@ def get_keyboards():
     keyboard_frequency = convertToString(keyboard_frequency)
     return{
         'start': keyboard_start,
-        'main_menu': keyboard_main_menu,
+        'main_menu_on': keyboard_main_menu_on,
+        'main_menu_off':keyboard_main_menu_off,
         'subscribe': keyboard_subscribe,
         'direction_selection': keyboard_direction_selection,
         'list': keyboard_list,

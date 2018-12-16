@@ -52,7 +52,7 @@ def search_direction_by_subjects(id):
                 response = ""
         if(response!=""):
             vk.method("messages.send", {"user_id": id,"message": response})
-        vk.method("messages.send", {"user_id": id,"message": "Заставил же ты меня потрудиться!😁", 'keyboard': key['main_menu']})
+        vk.method("messages.send", {"user_id": id,"message": "Заставил же ты меня потрудиться!😁", 'keyboard': get_main_keyboard(id =id, connection = connection)})
 
 def search_direction_by_sphere(id):
     sql = "SELECT NAME, DESCR, FACULTY, URL FROM DIRECTIONS WHERE ID IN (SELECT ID_DIR FROM DIR_SPHERES WHERE ID_SPHERE IN (SELECT ID_SPHERE FROM USERS_SPHERES WHERE ID_USER = "+str(id)+")) GROUP BY ID"
@@ -71,7 +71,7 @@ def search_direction_by_sphere(id):
                 response = ""
         if(response!=""):
             vk.method("messages.send", {"user_id": id,"message": response})
-        vk.method("messages.send", {"user_id": id,"message": "Искал как в последний раз😂", 'keyboard': key['main_menu']})
+        vk.method("messages.send", {"user_id": id,"message": "Искал как в последний раз😂", 'keyboard': get_main_keyboard(id =id, connection = connection)})
     else:
         vk.method("messages.send", {"user_id": id,"message":"А сферы я за тебя добавлять буду?", 'keyboard': key['sphere']})
 
@@ -84,6 +84,13 @@ def add_sphere(id, connection, pay):
 #WAIT_FILLING_POINTS = "-3"
 #WAIT_FILLING = "-2"
 #TEMP_FILLING = "-1"
+def get_main_keyboard(id, connection):
+    sql = "SELECT SUBSCRIBE FROM USERS WHERE ID = "+str(id)
+    res = data.executeSQL(sql = sql, connection = connection)
+    if res[0][0] == True:
+        return key['main_menu_on']
+    else:
+        return key['main_menu_off']
 
 
 def data_processing(id, pay, msg):
@@ -92,22 +99,22 @@ def data_processing(id, pay, msg):
     
     if pay=={"command":"start"} or pay == "admin":
         vk.method("messages.send", {"user_id": id, "message": "Привет, я бот Хван✋🏻\n \nИ я твой персональный помощник в мире НГТУ😎😎😎\n \nЯ могу помочь тебе с поступлением или просто рассказать о НГТУ и обо всем, что с ним связано😎\n \nПравда я пока не самый умный бот, мне еще учиться и учиться, поэтому, пожалуйста, общайся со мной посредством графической клавиатуры (заисключением тех случаев, когда я сам не попрошу написать мне что-нибудь) и тогда все будет чики-пуки🙃"})
-        vk.method("messages.send", {"user_id": id, "message": "Итак, чем я могу тебе помочь?", "keyboard": key['main_menu']})
+        vk.method("messages.send", {"user_id": id, "message": "Итак, чем я могу тебе помочь?", "keyboard": get_main_keyboard(id =id, connection = connection)})
     
     elif msg=="admin":
         vk.method("messages.send", {"user_id": id, "message": "Опять по новой? Ну, ладно...", "keyboard":key['start']})
     
     elif pay == "main_menu":
-        vk.method("messages.send", {"user_id": id, "message": "Сделал!", "keyboard":key['main_menu']})
+        vk.method("messages.send", {"user_id": id, "message": "Сделал!", "keyboard":get_main_keyboard(id =id, connection = connection)})
 
     elif pay=="subscribe":
         if data.get_field(connection=connection, table_name="USERS",select_field = "SUBSCRIBE", field="ID", value=id)[0][0]==False:
             print("tut")
             data.set_field(connection = connection, table_name = "USERS", ID_VK = id, field = "SUBSCRIBE", value = 1)
-            vk.method("messages.send", {"user_id": id, "message": "Теперь я буду отправлять тебе новости! Люблю это😍", 'keyboard': key['main_menu']})
+            vk.method("messages.send", {"user_id": id, "message": "Теперь я буду отправлять тебе новости! Люблю это😍", 'keyboard': get_main_keyboard(id =id, connection = connection)})
         else:
             data.set_field(connection = connection, table_name = "USERS", ID_VK = id, field = "SUBSCRIBE", value = 0)
-            vk.method("messages.send", {"user_id": id, "message": "Не хочешь, как хочешь...\nНо, если передумаешь, я всегда готов💪🏻", 'keyboard': key['main_menu']})
+            vk.method("messages.send", {"user_id": id, "message": "Не хочешь, как хочешь...\nНо, если передумаешь, я всегда готов💪🏻", 'keyboard': get_main_keyboard(id =id, connection = connection)})
     
     elif pay=="direction_selection":
         vk.method("messages.send", {"user_id": id, "message": " А как подобрать напрваление?", "keyboard":key['direction_selection']})
@@ -161,10 +168,10 @@ def data_processing(id, pay, msg):
         vk.method("messages.send", {"user_id": id, "message": "Выберите функцию:", "keyboard": key['list']})
     
     elif pay == "lk_code":
-        vk.method("messages.send", {"user_id": id, "message": "Меня пока что этому не научили😞\nНо совсем скоро научат, обещаю!", "keyboard": key['main_menu']})
+        vk.method("messages.send", {"user_id": id, "message": "Меня пока что этому не научили😞\nНо совсем скоро научат, обещаю!", "keyboard": get_main_keyboard(id =id, connection = connection)})
     
     elif pay == "frequency":
-        vk.method("messages.send", {"user_id": id, "message": "Меня пока что этому не научили😞\nНо совсем скоро научат, обещаю!", "keyboard": key['main_menu']})
+        vk.method("messages.send", {"user_id": id, "message": "Меня пока что этому не научили😞\nНо совсем скоро научат, обещаю!", "keyboard": get_main_keyboard(id =id, connection = connection)})
         #vk.method("messages.send", {"user_id": id, "message": "Как часто мне отправлять тебе новости?", "keyboard": key['frequency']})
     
     #elif pay == "one_per_day":
@@ -175,9 +182,9 @@ def data_processing(id, pay, msg):
     elif msg == "Бу!":
         vk.method("messages.send", {"user_id": id, "message": "Аааа!"})
         vk.method("messages.send", {"user_id": id, "message": "А, это ты😃"})
-        vk.method("messages.send", {"user_id": id, "message": "Не пугай меня так больше🙏🏻", "keyboard": key['main_menu']})
+        vk.method("messages.send", {"user_id": id, "message": "Не пугай меня так больше🙏🏻", "keyboard": get_main_keyboard(id =id, connection = connection)})
     else:
-        vk.method("messages.send", {"user_id": id, "message": "Я тебя не понимаю😔\nИспользуй, пожалуйста, клавиатуру🙏🏻", "keyboard": key['main_menu']})
+        vk.method("messages.send", {"user_id": id, "message": "Я тебя не понимаю😔\nИспользуй, пожалуйста, клавиатуру🙏🏻", "keyboard": get_main_keyboard(id =id, connection = connection)})
 
 def get_msg():
     while True:
