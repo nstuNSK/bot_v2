@@ -72,7 +72,7 @@ def set_spheres(values):
         sql = "SELECT * FROM SPHERES WHERE NAME = '"+str(sphere["SPHERE"])+"'"
         res = executeSQL(sql)
         if res == 0:
-            sql = "INSERT INTO SPHERE (ID, NAME) VALUES("+str(i)+", '"+str(sphere["SPHERE"])+"')"
+            sql = "INSERT INTO SPHERES (ID, NAME) VALUES("+str(i)+", '"+str(sphere["SPHERE"])+"')"
             executeSQL(sql)
 
 
