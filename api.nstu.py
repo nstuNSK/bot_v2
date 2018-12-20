@@ -82,7 +82,7 @@ def set_dir_sph(values):
                 sql = sql+"("+str(values["ID"])+", "+str(sph[0][0])+"),"
         if size < len(sql):
             sql = sql[0:len(sql)-1]
-            #cursor.execute(sql)
+            cursor.execute(sql)
             connection.commit()
 
 def set_dir_sub(values):
