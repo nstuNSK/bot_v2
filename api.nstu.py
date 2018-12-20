@@ -77,6 +77,7 @@ def set_dir_sph(values):
         size = len(sql)
         for sphere in values["data"]:
             if sphere["SPHERE"]!=None:
+                print(sphere["SPHERE"])
                 sql2 = "SELECT * FROM SPHERES WHERE NAME = '"+str(sphere["SPHERE"])+"'"
                 sph = executeSQL(sql2)
                 sql = sql+"("+str(values["ID"])+", "+str(sph[0][0])+"),"
