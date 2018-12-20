@@ -1,0 +1,719 @@
+auth successful!
+starting send for schoolchild
+send to: 91202745
+title msg sended
+news sended
+footer msg sended
+send to: 176468928
+title msg sended
+news sended
+footer msg sended
+starting send for enrollee
+send to: 91202745
+title msg sended
+news sended
+footer msg sended
+////////////
+new log:
+time: 2018-12-07 20:33:35.183407
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/7
+html created
+news object created
+send to schoolchild finished
+send to enrollee finished
+////////////
+ 
+end log
+ 
+auth successful!
+starting send for schoolchild
+send to: 91202745
+title msg sended
+news sended
+footer msg sended
+send to: 176468928
+title msg sended
+news sended
+footer msg sended
+starting send for enrollee
+send to: 91202745
+title msg sended
+news sended
+footer msg sended
+////////////
+new log:
+time: 2018-12-07 21:38:13.501205
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/7
+html created
+news object created
+send to schoolchild finished
+send to enrollee finished
+////////////
+ 
+end log
+ 
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+////////////
+new log:
+time: 2018-12-09 11:38:12.420860
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/9
+html created
+news object created
+starting send for schoolchild
+send to: 91202745
+title msg sended
+auth successful!
+////////////
+new log:
+time: 2018-12-09 11:40:00.271800
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/9
+html created
+news object created
+starting send for schoolchild
+send to: 91202745
+title msg sended
+auth successful!
+////////////
+new log:
+time: 2018-12-09 11:40:59.044077
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/9
+html created
+news object created
+starting send for schoolchild
+send to: 91202745
+title msg sended
+auth successful!
+////////////
+new log:
+time: 2018-12-09 11:42:32.225916
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/9
+html created
+News are empty
+end log
+ 
+auth successful!
+////////////
+new log:
+time: 2018-12-09 13:39:58.563257
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/4
+html created
+auth successful!
+starting send for schoolchild
+send to: 91202745
+title msg sended
+news sended
+footer msg sended
+send to: 176468928
+title msg sended
+news sended
+footer msg sended
+starting send for enrollee
+send to: 91202745
+title msg sended
+news sended
+footer msg sended
+////////////
+new log:
+time: 2018-12-09 13:42:15.334887
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/4
+html created
+news object created
+send to schoolchild finished
+send to enrollee finished
+////////////
+ 
+end log
+ 
+auth successful!
+////////////
+new log:
+time: 2018-12-09 14:05:15.486241
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/4
+html created
+auth successful!
+starting send for schoolchild
+////////////
+new log:
+time: 2018-12-09 14:10:14.600338
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/4
+html created
+news object created
+auth successful!
+starting send for schoolchild
+////////////
+new log:
+time: 2018-12-09 14:11:14.195674
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/4
+html created
+news object created
+auth successful!
+starting send for schoolchild
+////////////
+new log:
+time: 2018-12-09 14:13:43.308324
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/4
+html created
+news object created
+auth successful!
+starting send for schoolchild
+send to: 91202745
+title msg sended
+news sended
+footer msg sended
+send to: 176468928
+title msg sended
+news sended
+footer msg sended
+starting send for enrollee
+send to: 91202745
+title msg sended
+news sended
+footer msg sended
+////////////
+new log:
+time: 2018-12-09 14:14:54.850980
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/4
+html created
+news object created
+send to schoolchild finished
+send to enrollee finished
+////////////
+ 
+end log
+ 
+auth successful!
+starting send for schoolchild
+send to: 91202745
+title msg sended
+news sended
+footer msg sended
+send to: 176468928
+title msg sended
+news sended
+footer msg sended
+auth successful!
+auth successful!
+starting send for schoolchild
+////////////
+new log:
+time: 2018-12-09 14:36:48.563929
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/4
+html created
+news object created
+auth successful!
+starting send for schoolchild
+////////////
+new log:
+time: 2018-12-09 14:39:37.871861
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/4
+html created
+news object created
+auth successful!
+starting send for schoolchild
+starting send for enrollee
+////////////
+new log:
+time: 2018-12-09 14:40:45.957016
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/4
+html created
+news object created
+send to schoolchild finished
+send to enrollee finished
+////////////
+ 
+end log
+ 
+auth successful!
+auth successful!
+starting send for schoolchild
+send to: 176468928
+title msg sended
+news sended
+footer msg sended
+starting send for enrollee
+////////////
+new log:
+time: 2018-12-09 14:42:05.964188
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/4
+html created
+news object created
+send to schoolchild finished
+send to enrollee finished
+////////////
+ 
+end log
+ 
+auth successful!
+starting send for schoolchild
+////////////
+new log:
+time: 2018-12-09 15:01:22.555544
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/4
+html created
+news object created
+auth successful!
+starting send for schoolchild
+////////////
+new log:
+time: 2018-12-09 15:02:38.886394
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/4
+html created
+news object created
+auth successful!
+starting send for schoolchild
+send to: 176468928
+title msg sended
+news sended
+footer msg sended
+starting send for enrollee
+////////////
+new log:
+time: 2018-12-09 15:06:31.385755
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/4
+html created
+news object created
+send to schoolchild finished
+send to enrollee finished
+////////////
+ 
+end log
+ 
+auth successful!
+starting send for schoolchild
+send to: 176468928
+title msg sended
+news sended
+footer msg sended
+starting send for enrollee
+////////////
+new log:
+time: 2018-12-09 15:06:48.095323
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/4
+html created
+news object created
+send to schoolchild finished
+send to enrollee finished
+////////////
+ 
+end log
+ 
+auth successful!
+starting send for schoolchild
+send to: 176468928
+title msg sended
+news sended
+footer msg sended
+starting send for enrollee
+////////////
+new log:
+time: 2018-12-09 15:06:57.011894
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/4
+html created
+news object created
+send to schoolchild finished
+send to enrollee finished
+////////////
+ 
+end log
+ 
+auth successful!
+auth successful!
+starting send for schoolchild
+////////////
+new log:
+time: 2018-12-09 15:14:08.509512
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/4
+html created
+news object created
+auth successful!
+starting send for schoolchild
+send to: 176468928
+title msg sended
+news sended
+footer msg sended
+starting send for enrollee
+////////////
+new log:
+time: 2018-12-09 15:16:25.273258
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/4
+html created
+news object created
+send to schoolchild finished
+send to enrollee finished
+////////////
+ 
+end log
+ 
+auth successful!
+starting send for schoolchild
+send to: 176468928
+title msg sended
+footer msg sended
+starting send for enrollee
+////////////
+new log:
+time: 2018-12-09 15:16:37.408430
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/4
+html created
+news object created
+send to schoolchild finished
+send to enrollee finished
+////////////
+ 
+end log
+ 
+auth successful!
+starting send for schoolchild
+send to: 176468928
+title msg sended
+footer msg sended
+starting send for enrollee
+////////////
+new log:
+time: 2018-12-09 15:17:28.813343
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/4
+html created
+news object created
+send to schoolchild finished
+send to enrollee finished
+////////////
+ 
+end log
+ 
+auth successful!
+starting send for schoolchild
+////////////
+new log:
+time: 2018-12-09 15:18:35.771634
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/4
+html created
+news object created
+auth successful!
+starting send for schoolchild
+starting send for enrollee
+////////////
+new log:
+time: 2018-12-09 15:19:06.046769
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/4
+html created
+news object created
+send to schoolchild finished
+send to enrollee finished
+////////////
+ 
+end log
+ 
+auth successful!
+auth successful!
+starting send for schoolchild
+send to: 91202745
+title msg sended
+news sended
+footer msg sended
+starting send for enrollee
+////////////
+new log:
+time: 2018-12-09 15:22:11.598727
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/4
+html created
+news object created
+send to schoolchild finished
+send to enrollee finished
+////////////
+ 
+end log
+ 
+auth successful!
+////////////
+new log:
+time: 2018-12-09 15:23:55.028981
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/9
+html created
+auth successful!
+////////////
+new log:
+time: 2018-12-09 15:24:51.144313
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/9
+html created
+News are empty
+end log
+ 
+auth successful!
+////////////
+new log:
+time: 2018-12-09 15:36:44.120028
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/9
+html created
+News are empty
+end log
+ 
+auth successful!
+////////////
+new log:
+time: 2018-12-09 15:37:20.761781
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/9
+html created
+News are empty
+end log
+ 
+auth successful!
+auth successful!
+////////////
+new log:
+time: 2018-12-09 15:38:05.068643
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/9
+html created
+News are empty
+end log
+ 
+auth successful!
+////////////
+new log:
+time: 2018-12-09 15:38:46.726826
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/9
+html created
+News are empty
+end log
+ 
+auth successful!
+starting send for schoolchild
+send to: 176468928
+title msg sended
+news sended
+news sended
+news sended
+news sended
+news sended
+footer msg sended
+starting send for enrollee
+////////////
+new log:
+time: 2018-12-09 15:40:55.556534
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/4
+html created
+news object created
+send to schoolchild finished
+send to enrollee finished
+////////////
+ 
+end log
+ 
+auth successful!
+auth successful!
+starting send for schoolchild
+send to: 176468928
+title msg sended
+news sended
+footer msg sended
+starting send for enrollee
+////////////
+new log:
+time: 2018-12-09 15:44:23.520056
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/4
+html created
+news object created
+send to schoolchild finished
+send to enrollee finished
+////////////
+ 
+end log
+ 
+auth successful!
+////////////
+new log:
+time: 2018-12-09 23:19:14.978018
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/4
+html created
+news object created
+starting send for schoolchild
+send to: 176468928
+title msg sended
+auth successful!
+starting send for schoolchild
+starting send for enrollee
+////////////
+new log:
+time: 2018-12-09 23:21:04.238386
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/4
+html created
+news object created
+send to schoolchild finished
+send to enrollee finished
+////////////
+ 
+end log
+ 
+auth successful!
+starting send for schoolchild
+starting send for enrollee
+////////////
+new log:
+time: 2018-12-09 23:21:07.989533
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/4
+html created
+news object created
+send to schoolchild finished
+send to enrollee finished
+////////////
+ 
+end log
+ 
+auth successful!
+////////////
+new log:
+time: 2018-12-09 23:22:04.555859
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/9
+html created
+News are empty
+end log
+ 
+auth successful!
+////////////
+new log:
+time: 2018-12-09 23:22:08.255658
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/9
+html created
+News are empty
+end log
+ 
+auth successful!
+starting send for schoolchild
+send to: 176468928
+title msg sended
+news sended
+footer msg sended
+starting send for enrollee
+////////////
+new log:
+time: 2018-12-10 13:11:19.652204
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/10
+html created
+news object created
+send to schoolchild finished
+send to enrollee finished
+////////////
+ 
+end log
+ 
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+////////////
+new log:
+time: 2018-12-17 00:52:28.737351
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/17
+html created
+News are empty
+end log
+ 
+auth successful!
+starting send for schoolchild
+////////////
+new log:
+time: 2018-12-17 00:53:47.007760
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/04
+html created
+news object created
+auth successful!
+starting send for schoolchild
+////////////
+new log:
+time: 2018-12-17 00:55:04.866274
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/04
+html created
+news object created
+auth successful!
+starting send for schoolchild
+send to: 176468928
+title msg sended
+news sended
+footer msg sended
+////////////
+new log:
+time: 2018-12-17 00:55:42.279252
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/04
+html created
+news object created
+sended!
+end log
+ 
+auth successful!
+starting send for schoolchild
+////////////
+new log:
+time: 2018-12-17 00:55:58.026532
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/04
+html created
+news object created
+sended!
+end log
+ 
+auth successful!
+////////////
+new log:
+time: 2018-12-17 00:56:58.532954
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/17
+html created
+News are empty
+end log
+ 
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+starting send for schoolchild
+send to: 176468928
+title msg sended
+news sended
+footer msg sended
+////////////
+new log:
+time: 2018-12-17 23:52:51.246760
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/17
+html created
+news object created
+sended!
+end log
+ 
