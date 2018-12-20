@@ -71,7 +71,7 @@ def executeSQL(sql):
             return 0
 
 
-def set_dir_sphere(values):
+def set_dir_sph(values):
     with connection.cursor() as cursor:
         sql = "INSERT INTO DIR_SPHERES (ID_DIR, ID_SPHERE) VALUES"
         size = len(sql)
@@ -97,20 +97,6 @@ def set_dir_sub(values):
     sql = "SELECT ID FROM SUBJECTS WHERE NAME = '"+str(d3)+"'"
     r = executeSQL(sql)
     sql = "INSERT INTO DIR_SUBJECTS (ID_DIR, ID_SUB) VALUES("+str(values["ID"])+", "+str(r[0][0])+")"
-    executeSQL(sql)
-
-def set_dir_sph(values):
-    disk2 = values["DISC2"]
-    disk3 = values["DISC3"]
-    d2 = subjects[disk2]
-    d3 = subjects[disk3]
-    sql = "SELECT ID FROM SPHERES WHERE NAME = '"+str(d2)+"'"
-    r = executeSQL(sql)
-    sql = "INSERT INTO DIR_SPHERES (ID_DIR, ID_SPHERE) VALUES("+str(values["ID"])+", "+str(r[0][0])+")"
-    executeSQL(sql)
-    sql = "SELECT ID FROM SPHERES WHERE NAME = '"+str(d3)+"'"
-    r = executeSQL(sql)
-    sql = "INSERT INTO DIR_SPHERES (ID_DIR, ID_SPHERE) VALUES("+str(values["ID"])+", "+str(r[0][0])+")"
     executeSQL(sql)
 
 
