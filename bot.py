@@ -58,9 +58,6 @@ def add_sphere(id, connection, pay):
     sql = "INSERT INTO USERS_SPHERES (ID_USER, ID_SPHERE) VALUES("+str(id)+", "+str(idSph[0][0])+")"
     data.executeSQL(sql = sql, connection = connection)
 
-#WAIT_FILLING_POINTS = "-3"
-#WAIT_FILLING = "-2"
-#TEMP_FILLING = "-1"
 def get_main_keyboard(id, connection):
     sql = "SELECT SUBSCRIBE FROM USERS WHERE ID = "+str(id)
     res = data.executeSQL(sql = sql, connection = connection)
@@ -68,7 +65,6 @@ def get_main_keyboard(id, connection):
         return key['main_menu_on']
     else:
         return key['main_menu_off']
-
 
 def data_processing(id, pay, msg):
     if data.search_field(table_name="USERS",connection=connection,value=id, field="ID")==False:
@@ -139,8 +135,6 @@ def data_processing(id, pay, msg):
         search_direction(id = id, type = "SPHERE")
     elif pay == "search_by_subjects":
         search_direction(id = id, type = "SUBJECTS")
-    #elif pay == "name_dir":
-        #vk.method("messages.send", {"user_id": id, "message": "Меня пока что этому не научили😞\nНо совсем скоро научат, обещаю!", "keyboard": key['main_menu']})
     elif pay == "lists":
         vk.method("messages.send", {"user_id": id, "message": "Выберите функцию:", "keyboard": key['list']})
     
@@ -149,13 +143,7 @@ def data_processing(id, pay, msg):
     
     elif pay == "frequency":
         vk.method("messages.send", {"user_id": id, "message": "Меня пока что этому не научили😞\nНо совсем скоро научат, обещаю!", "keyboard": get_main_keyboard(id =id, connection = connection)})
-        #vk.method("messages.send", {"user_id": id, "message": "Как часто мне отправлять тебе новости?", "keyboard": key['frequency']})
     
-    #elif pay == "one_per_day":
-        #vk.method("messages.send", {"user_id": id, "message": "Я буду отправлять тебе", "keyboard":key['main_menu']})
-
-    #elif pay == "two_per_day":
-        #vk.method("messages.send", {"user_id": id, "message": "Опять по новой? Ну, ладно...", "keyboard":key['main_menu']})
     elif msg == "Бу!":
         vk.method("messages.send", {"user_id": id, "message": "Аааа!"})
         vk.method("messages.send", {"user_id": id, "message": "А, это ты😃"})

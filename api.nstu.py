@@ -1,9 +1,19 @@
 import requests
+import pymysql.cursors
 import json
-import database as data
 import getter
-#sphere disc2 disc3
-connection = data.connect()
+def connect():
+    #try:
+        user = getter.get_user()
+        password = getter.get_password()
+        cnx = pymysql.connect(
+            user=user,
+			password = password,
+            host = 'localhost',
+            db='TEMP'
+        )
+        return cnx
+connection = connect()
 subjects = {'Математика': "math",
 'Биология': "biology",
 'История': "history",
@@ -36,9 +46,7 @@ def search_field(table_name, field, value):
         return True
 
 
-def set_dir(table_name, values):
-    print(values)
-    res = 0
+def set_dir(values):
     if values["BALL_K"] == None:
         values["BALL_K"] = 0
     if values["BALL_B"] == None:
@@ -49,16 +57,9 @@ def set_dir(table_name, values):
         values["PROFILE_NAME"] = "null"
     with connection.cursor() as cursor:
             if search_field("DIRECTIONS", "ID", values["ID"]) == False:
-                sql = "INSERT INTO " + table_name + "(DESCR, PROFILE_NAME, ID, FACULTY, KEYS_PLUS, NAME, BALL_K, BALL_B, URL) VALUES ( '" +str(values["DESCR"])+ "', '"+str(values["DESCR"])+"', '"+str(values["ID"])+"', '"+str(values["FACULT"])+"', '"+str(values["KEYS_PLUS"])+"', '"+str(values["DIRECTION"])+"', '"+str(values["BALL_K"])+"', '"+str(values["BALL_B"])+"', '"+str(values["URL"])+"')"
+                sql = "INSERT INTO DIRECTIONS (DESCR, PROFILE_NAME, ID, FACULTY, KEYS_PLUS, NAME, BALL_K, BALL_B, URL) VALUES ( '" +str(values["DESCR"])+ "', '"+str(values["DESCR"])+"', '"+str(values["ID"])+"', '"+str(values["FACULT"])+"', '"+str(values["KEYS_PLUS"])+"', '"+str(values["DIRECTION"])+"', '"+str(values["BALL_K"])+"', '"+str(values["BALL_B"])+"', '"+str(values["URL"])+"')"
                 cursor.execute(sql)
                 connection.commit()
-            
-            '''else:
-                val = get_field("DIRECTIONS","SPHERE","ID_DIR",values["ID"])
-                val = val*100+values["SPHEPE"]
-                sql = "UPDATE "+table_name+" SET SPHERE = '"+str(val)+"' WHERE ID_DIR = '" + str(values["ID"]) + "'"
-                cursor.execute(sql)
-                connection.commit()'''
 
 def executeSQL(sql):
     with connection.cursor() as cursor:
@@ -70,9 +71,7 @@ def executeSQL(sql):
             return 0
 
 
-
-
-def set_sphere(values):
+def set_dir_sphere(values):
     with connection.cursor() as cursor:
         sql = "INSERT INTO DIR_SPHERES (ID_DIR, ID_SPHERE) VALUES"
         size = len(sql)
@@ -83,11 +82,10 @@ def set_sphere(values):
                 sql = sql+"("+str(values["ID"])+", "+str(sph[0][0])+"),"
         if size < len(sql):
             sql = sql[0:len(sql)-1]
-            print(sql)
             cursor.execute(sql)
             connection.commit()
 
-def set_sub(values):
+def set_dir_sub(values):
     disk2 = values["DISC2"]
     disk3 = values["DISC3"]
     d2 = subjects[disk2]
@@ -101,6 +99,20 @@ def set_sub(values):
     sql = "INSERT INTO DIR_SUBJECTS (ID_DIR, ID_SUB) VALUES("+str(values["ID"])+", "+str(r[0][0])+")"
     executeSQL(sql)
 
+def set_dir_sph(values):
+    disk2 = values["DISC2"]
+    disk3 = values["DISC3"]
+    d2 = subjects[disk2]
+    d3 = subjects[disk3]
+    sql = "SELECT ID FROM SPHERES WHERE NAME = '"+str(d2)+"'"
+    r = executeSQL(sql)
+    sql = "INSERT INTO DIR_SPHERES (ID_DIR, ID_SPHERE) VALUES("+str(values["ID"])+", "+str(r[0][0])+")"
+    executeSQL(sql)
+    sql = "SELECT ID FROM SPHERES WHERE NAME = '"+str(d3)+"'"
+    r = executeSQL(sql)
+    sql = "INSERT INTO DIR_SPHERES (ID_DIR, ID_SPHERE) VALUES("+str(values["ID"])+", "+str(r[0][0])+")"
+    executeSQL(sql)
+
 
 
 
@@ -110,9 +122,11 @@ def main():
     text = html.text
     text = bytes(text, 'utf-8').decode('unicode-escape')
     api = json.loads(text)
-    i = 1
     for item in api:
-        set_sub(item)
+        set_dir(item)
+    for item in api:
+        set_dir_sub(item)
+        set_dir_sph(item)
 
 if __name__== '__main__':
     main()
