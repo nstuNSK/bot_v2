@@ -717,3 +717,17 @@ news object created
 sended!
 end log
  
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
+auth successful!
