@@ -9,6 +9,11 @@ from datetime import datetime
 
 connection = data.connect()
 
+def from_pay_to_msg(pay):
+    sql = "SELECT MSG FROM MSGS WHERE PAY = '"+str(pay)+"'"
+    print(sql)
+    return data.executeSQL(sql = sql, connection = connection)
+
 def auth():
     f = open("logs.txt", "a")
     token = getter.get_token()
@@ -82,12 +87,12 @@ def send_news(news, vk, type):
             print(msgs)
             if msgs!=[] and msgs!=['']:
                 f.write("send to: " + str(id[0])+"\n")
-                vk.method("messages.send", {"user_id": id[0], "message": "Вот, принес тебе последние новости😊"})
+                vk.method("messages.send", {"user_id": id[0], "message": random.choice(from_pay_to_msg("NEWS_START"))[0]})
                 f.write("title msg sended\n")
                 for msg in msgs:
                     vk.method("messages.send", {"user_id": id[0], "message": msg})
                     f.write("news sended\n")
-                vk.method("messages.send", {"user_id": id[0], "message": "Пока все😊"})
+                vk.method("messages.send", {"user_id": id[0], "message": random.choice(from_pay_to_msg("NEWS_END"))[0]})
                 f.write("footer msg sended\n")
     f.close()
 

@@ -731,3 +731,13 @@ auth successful!
 auth successful!
 auth successful!
 auth successful!
+auth successful!
+auth successful!
+////////////
+new log:
+time: 2018-12-23 16:24:49.001734
+url: https://api.ciu.nstu.ru/v1.0/news/schoolkids/2018/12/23
+html created
+News are empty
+end log
+ 
